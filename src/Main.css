@@ -1,0 +1,16 @@
+/* JavaFX CSS 
+ * Define rules to style the GUI components
+ * @author cspeter
+ */
+
+.menu-title {
+	-fx-font-size: 25;
+}
+.menu-button {
+	 -fx-pref-width:200;
+	 -fx-pref-height:40;
+}
+
+.screen-background {
+	-fx-background-color: white;
+}
