@@ -4,7 +4,8 @@ Team Name: RyanX's Playful Blue Moon
 
 Team Members:
 
+- LI Xiang (xlide), Team Leader
 
-¡¤Zhao Xinran (xzhaoar)
+- Zhao Xinran (xzhaoar) 
 
-
+- Chen Qixu (qchenax)
