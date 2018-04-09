@@ -2,7 +2,7 @@ package core.comp3111;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.ArrayList;;
 /**
  * 2D array of data values with the following requirements: (1) There are 0 to
  * many columns (2) The number of row for each column is the same (3) 2 columns
@@ -124,6 +124,118 @@ public class DataTable {
 		Map.Entry<String, DataColumn> entry = dc.entrySet().iterator().next();
 		return dc.get(entry.getKey()).getSize();
 	}
+	
+	
+	//**********************************************************************//
+	//Following is the filtering and transformation algorithm implementation.
+	//In these algorithms the dataTye of the target DataColumn is checked
+	//before doing transformations
+	
+	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException {
+		
+		DataTable result = new DataTable();
+        
+		// In case the DataTable is empty
+		int rowNum= getNumRow();
+		if(rowNum<=0) return result;
+				
+		
+		Object[] targetData= getCol(colName).getData();
+		ArrayList<Integer> keep= new ArrayList<Integer>();
+		
+		//find out which element to keep in the new DataTable;
+		switch(operator) {
+		
+		
+		case "biggerThan":
+		    for(int i=0; i< getCol(colName).getSize();i++){
+			    if((double)targetData[i]>num) {
+				    keep.add(i);
+			    }
+		    }
+		    break;
+				
+		case "smallerThan":
+			for(int i=0; i< getCol(colName).getSize();i++){
+			    if((double)targetData[i]<num) {
+				    keep.add(i);
+			    }
+		    }
+		    break;
+			
+		default:
+			
+		}
+		
+		
+		//create the new DataTable
+		int newSize = keep.size();
+		
+		//each iteration deals with 1 column
+		for(String curColName: dc.keySet()) {
+			DataColumn curCol = getCol(curColName);
+			Object[] curColData = curCol.getData();
+			Object[] newColData = new Object[newSize];
+			
+			int pos = 0;
+			for(int i : keep) {
+				newColData[pos] = curColData[i];
+				i++;
+			}
+			
+			DataColumn newCol= new DataColumn(curCol.getTypeName(), newColData);
+			result.addCol(curColName, newCol);
+		}	
+		
+		return result;
+	}
+	
+	
+	
+	// This algorithm filter the datacolumn by tex label
+	public DataTable filterByLabel(String colName, String label, double num) throws DataTableException {
+		
+		DataTable result = new DataTable();
+        
+		// In case the DataTable is empty
+		int rowNum= getNumRow();
+		if(rowNum<=0) return result;
+				
+		
+		Object[] targetData= getCol(colName).getData();
+		ArrayList<Integer> keep= new ArrayList<Integer>();
+		
+		//find out which element to keep in the new DataTable;
+		for(int i=0; i<getCol(colName).getSize();i++) {
+			if(label.equalsIgnoreCase((String)targetData[i])) {
+				keep.add(i);
+			}
+		}
+		
+		//create the new DataTable
+		int newSize = keep.size();
+		
+		//each iteration deals with 1 column
+		for(String curColName: dc.keySet()) {
+			DataColumn curCol = getCol(curColName);
+			Object[] curColData = curCol.getData();
+			Object[] newColData = new Object[newSize];
+			
+			int pos = 0;
+			for(int i : keep) {
+				newColData[pos] = curColData[i];
+				i++;
+			}
+			
+			DataColumn newCol= new DataColumn(curCol.getTypeName(), newColData);
+			result.addCol(curColName, newCol);
+		}	
+		
+		return result;
+	}
+	
+	
+	
 
 	// attribute: A java.util.Map interface
 	// KeyType: String
