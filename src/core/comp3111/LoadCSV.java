@@ -41,7 +41,7 @@ public class LoadCSV {
 		
 		
 		// Load the data
-		ArrayList<ArrayList<String>> csvList = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> csvList = new ArrayList<>();
 		
 		BufferedReader reader2 = new BufferedReader(new FileReader(fileName));
 		String line2 = null;
@@ -58,17 +58,44 @@ public class LoadCSV {
 		
 		// Decide the filling staff
 		// There are two situations when we need fill: Row < RowNum and ,, for Num
+		
 		String stringfill = "";
 		int numfill = 0;
 		
+		// Generate a type mapping
+		ArrayList<String> typeMap = new ArrayList<>();
+		String Indicator = "Number";
+		for (int i = 0; i < ColNum; i++) {
+			for (int j = 0; j < csvList.size(); j++) {
+				if (isNumber(csvList.get(j).get(i)) == false) {
+					Indicator = "String";
+					// if one in the col is not string, it is string type
+				}
+			}
+			
+			typeMap.add(Indicator);
+		}
+		
 		// first fill everything with ""
+		
 		for(int i = 0; i < csvList.size(); i++) {
-			while (csvList.get(i).size() < ColNum) {
+			while (csvList.get(i).size() < RowNum) {
 				csvList.get(i).add(stringfill);
 			}
 		}
 		
 		// Transpose the Arraylist
+		ArrayList<Double> ColofNum = new ArrayList<>(); 
+		
+		for(int i = 0; i < csvList.size(); i++) {
+			for(int j = 0; j < csvList.get(i).size(); j++) {
+				if(csvList.get(i).get(j) == "") {
+					
+				}
+			}
+		}
+		
+		
 		
 			
 			
@@ -77,5 +104,16 @@ public class LoadCSV {
 					
 
 		return result;
+	}
+	
+	// Help Function: check if it's number
+	public static boolean isNumber(String str) {
+		try {
+			double check = Double.parseDouble(str);
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;
 	}
 }
