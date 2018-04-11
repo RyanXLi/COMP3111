@@ -66,8 +66,12 @@ public class LoadCSV {
 		
 		// Generate a type mapping
 		ArrayList<String> typeMap = new ArrayList<>();
-		String Indicator = "Number";
+		String indicator = "Number";
+		boolean allComma = true;
+		
 		for (int i = 0; i < RowNum; i++) {
+			allComma = true;
+			
 			for (int j = 0; j < csvList.size(); j++) {
 				
 				if (csvList.get(j).size() < i) {
@@ -77,14 +81,22 @@ public class LoadCSV {
 				if (csvList.get(j).get(i) == "") {
 					continue;
 				} // so we define all comma case as Number
-				
+								
 				if (isNumber(csvList.get(j).get(i)) == false) {
-					Indicator = "String";
+					indicator = "String";
+					if (allComma) {
+						allComma = false;
+					}
 					// if one in the col is not string, it is string type
 				}
 			}
 			
-			typeMap.add(Indicator);
+			if (!allComma) {
+				typeMap.add(indicator);
+			} else {
+				typeMap.add("String");
+			}
+			
 		}
 		
 		// first fill everything with ""
