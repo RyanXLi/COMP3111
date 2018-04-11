@@ -15,8 +15,6 @@ import java.util.*;
  */
 
 public class LoadCSV {
-	
-	private static final int ColNum = 0;
 
 	public DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
 		
@@ -36,6 +34,7 @@ public class LoadCSV {
 				if (item.length > RowNum) {
 					RowNum = item.length;
 				}
+				
 				ColNum = ColNum + 1;
 			}
 		} catch (Exception e) {
@@ -68,8 +67,17 @@ public class LoadCSV {
 		// Generate a type mapping
 		ArrayList<String> typeMap = new ArrayList<>();
 		String Indicator = "Number";
-		for (int i = 0; i < ColNum; i++) {
+		for (int i = 0; i < RowNum; i++) {
 			for (int j = 0; j < csvList.size(); j++) {
+				
+				if (csvList.get(j).size() < i) {
+					continue;
+				}
+				
+				if (csvList.get(j).get(i) == "") {
+					continue;
+				} // so we define all comma case as Number
+				
 				if (isNumber(csvList.get(j).get(i)) == false) {
 					Indicator = "String";
 					// if one in the col is not string, it is string type
@@ -88,7 +96,8 @@ public class LoadCSV {
 		}
 		
 		// deal with special fill
-		for (int i = 0; i < ColNum; i++) {
+		for (int i = 0; i < RowNum; i++) {
+			
 			if (typeMap.get(i) == "Number") {
 				ArrayList<Double> temp = new ArrayList<>();
 				// get the numbers
@@ -134,7 +143,7 @@ public class LoadCSV {
 		}
 		
 		//Set the columns and append to the result
-		for (int i = 0; i < ColNum; i++) {
+		for (int i = 0; i < RowNum; i++) {
 			
 			if (typeMap.get(i) == "Number") {
 				
