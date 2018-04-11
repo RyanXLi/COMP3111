@@ -1,21 +1,24 @@
 package core.comp3111;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.io.BufferedReader; 
 import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.*;
 
 /*
  * This is a function to load .csv to create a datatable
- * The inputs are the filename and miss data handling type
+ * The inputs are the filename and miss data handling type(Median or Mean)
  */
 
 public class LoadCSV {
 	
 	private static final int ColNum = 0;
 
-	public DataTable loadCSV(String fileName, String handleType) throws IOException {
+	public DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
 		
 		DataTable result = new DataTable();
 		int RowNum = 0;
@@ -60,7 +63,7 @@ public class LoadCSV {
 		// There are two situations when we need fill: Row < RowNum and ,, for Num
 		
 		String stringfill = "";
-		int numfill = 0;
+		double numfill = 0;
 		
 		// Generate a type mapping
 		ArrayList<String> typeMap = new ArrayList<>();
@@ -84,25 +87,78 @@ public class LoadCSV {
 			}
 		}
 		
-		// Transpose the Arraylist
-		ArrayList<Double> ColofNum = new ArrayList<>(); 
-		
-		for(int i = 0; i < csvList.size(); i++) {
-			for(int j = 0; j < csvList.get(i).size(); j++) {
-				if(csvList.get(i).get(j) == "") {
+		// deal with special fill
+		for (int i = 0; i < ColNum; i++) {
+			if (typeMap.get(i) == "Number") {
+				ArrayList<Double> temp = new ArrayList<>();
+				// get the numbers
+				for (int j = 0; j < csvList.size(); j++) {
+					if(csvList.get(j).get(i) != "") {
+						temp.add(Double.parseDouble(csvList.get(j).get(i)));
+					}
+				}
+				
+				// Handle Mean
+				if (handleType == "Mean") {
+					double sum = 0;
+					for (int j = 0; j < temp.size(); j++) {
+						sum = sum + temp.get(j);
+					}
+					numfill = sum/ temp.size();
+				}
+				
+				// Handle Media
+				if (handleType == "Median") {
+					// Sorting 
+					Collections.sort(temp);
 					
+					int index;
+					if (temp.size()%2 == 1) {
+						index = temp.size()/2;
+						index++;
+						numfill = temp.get(index);
+					} else {
+						index = temp.size()/2;
+						numfill = (temp.get(index) + temp.get(index+1))/2;
+					}
+				}
+				
+				for (int j = 0; j < csvList.size(); j++) {
+					if(csvList.get(j).get(i) == "") {
+						ArrayList<String> filltemp = csvList.get(j);
+						filltemp.set(i, Double.toString(numfill));
+						csvList.set(j, filltemp);
+					}
 				}
 			}
 		}
 		
+		//Set the columns and append to the result
+		for (int i = 0; i < ColNum; i++) {
+			
+			if (typeMap.get(i) == "Number") {
+				
+				ArrayList<Double> temp = new ArrayList<>();
+				// get the numbers
+				for (int j = 0; j < csvList.size(); j++) {
+					temp.add(Double.parseDouble(csvList.get(j).get(i)));
+				}
+				DataColumn newCol = new DataColumn("Number", temp.toArray());
+				result.addCol("Number", newCol);
+			
+			} else {
+				
+				ArrayList<String> temp = new ArrayList<>();
+				// get the strings
+				for (int j = 0; j < csvList.size(); j++) {
+					temp.add(csvList.get(j).get(i));
+				}
+				DataColumn newCol = new DataColumn("String", temp.toArray());
+				result.addCol("Number", newCol);
+			}
+			
+		}
 		
-		
-			
-			
-			
-					
-					
-
 		return result;
 	}
 	
