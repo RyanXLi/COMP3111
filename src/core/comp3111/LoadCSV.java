@@ -182,7 +182,7 @@ public class LoadCSV {
 				if (!result.containsColumn(nameMap.get(i))) {
 					result.addCol(nameMap.get(i), newCol);
 				} else {
-					result.addCol(nameMap.get(i) + i, newCol);
+					result.addCol(nameMap.get(i) + " @"+ i, newCol);
 					// if duplicated add the Column index in the name
 				}
 				
@@ -198,7 +198,7 @@ public class LoadCSV {
 				if (!result.containsColumn(nameMap.get(i))) {
 					result.addCol(nameMap.get(i), newCol);
 				} else {
-					result.addCol(nameMap.get(i) + i, newCol);
+					result.addCol(nameMap.get(i)+ " @" + i, newCol);
 				}
 			}
 			
