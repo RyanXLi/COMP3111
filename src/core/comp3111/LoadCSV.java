@@ -48,6 +48,20 @@ public class LoadCSV {
 		BufferedReader reader2 = new BufferedReader(new FileReader(fileName));
 		String line2 = null;
 		
+		// Read the name row
+		ArrayList<String> nameMap = new ArrayList<>();
+		line2 = reader2.readLine();
+		ColNum = ColNum -1;
+		String[] nameRead = line2.split(",");
+		for (int i = 0; i < nameRead.length; i++) {
+			nameMap.add(nameRead[i]);
+		}
+			// add "" as the primary name if not specified
+		while (nameMap.size() < RowNum) {
+			nameMap.add("");
+		}
+		
+		
 		while ((line2 = reader2.readLine()) != null) {
 				String[] items = line2.split(",");
 				ArrayList<String> temp = null;
@@ -165,7 +179,13 @@ public class LoadCSV {
 					temp.add(Double.parseDouble(csvList.get(j).get(i)));
 				}
 				DataColumn newCol = new DataColumn("Number", temp.toArray());
-				result.addCol("Number" + i, newCol);
+				if (!result.containsColumn(nameMap.get(i))) {
+					result.addCol(nameMap.get(i), newCol);
+				} else {
+					result.addCol(nameMap.get(i) + i, newCol);
+					// if duplicated add the Column index in the name
+				}
+				
 			
 			} else {
 				
@@ -174,8 +194,12 @@ public class LoadCSV {
 				for (int j = 0; j < csvList.size(); j++) {
 					temp.add(csvList.get(j).get(i));
 				}
-				DataColumn newCol = new DataColumn("String", temp.toArray());
-				result.addCol("String" + i, newCol);
+				DataColumn newCol = new DataColumn("Number", temp.toArray());
+				if (!result.containsColumn(nameMap.get(i))) {
+					result.addCol(nameMap.get(i), newCol);
+				} else {
+					result.addCol(nameMap.get(i) + i, newCol);
+				}
 			}
 			
 		}
