@@ -165,7 +165,7 @@ public class LoadCSV {
 					temp.add(Double.parseDouble(csvList.get(j).get(i)));
 				}
 				DataColumn newCol = new DataColumn("Number", temp.toArray());
-				result.addCol("Number", newCol);
+				result.addCol("Number" + i, newCol);
 			
 			} else {
 				
@@ -175,7 +175,7 @@ public class LoadCSV {
 					temp.add(csvList.get(j).get(i));
 				}
 				DataColumn newCol = new DataColumn("String", temp.toArray());
-				result.addCol("Number", newCol);
+				result.addCol("String" + i, newCol);
 			}
 			
 		}
