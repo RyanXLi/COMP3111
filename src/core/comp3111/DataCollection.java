@@ -1,13 +1,13 @@
 package core.comp3111;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.ArrayList;;
+
 //
 public class DataCollection {
 	public DataCollection(){
-		tableCollection = new HashMap<String, DataTable>();
-		chartCollection = new HashMap<String, DataChart>();
+		tableCollection = new LinkedHashMap<String, DataTable>();
+		chartCollection = new LinkedHashMap<String, DataChart>();
 		tableNum=1;
 		chartNum=1;
 	}
@@ -35,6 +35,17 @@ public class DataCollection {
 		chartCollection.put(name, dc);
 		++chartNum;
 		return;
+	}
+	
+	
+	
+	
+	public Map<String, DataTable> getTableCollection(){
+		return tableCollection;
+	}
+	
+	public Map<String, DataChart> getChartCollection(){
+		return chartCollection;
 	}
 	
 	
