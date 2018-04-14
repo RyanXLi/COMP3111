@@ -86,6 +86,37 @@ public class DataCollection {
 		return;
 	}
 	
+	//NumberFormatException, DataTableException 
+	public void numFilter(String dtName, String colName, String op, String num, 
+			boolean handleMode){
+		DataTable originDT = tableCollection.get(dtName);
+		DataTable resultDT = new DataTable();
+        try{resultDT = originDT.filterByOperator(colName, op, Double.parseDouble(num));}
+        catch(NumberFormatException e1){
+        	return;
+        }
+        catch(DataTableException e2) {
+        	return;
+        }
+        if(handleMode==true) {
+        	removeDataTable(dtName);
+        }
+        addDataTable(resultDT);
+        return;
+	}
+	
+	public void textFilter(String dtName, String colName, String text, boolean handleMode) {
+		DataTable originDT = tableCollection.get(dtName);
+		DataTable resultDT = new DataTable();
+		try {resultDT = originDT.filterByLabel(colName, text);}
+		catch(DataTableException e1) { return; }
+		if(handleMode==true) {
+	      	removeDataTable(dtName);
+	    }
+	    addDataTable(resultDT);
+	    return;
+	}
+	
 	private Map<String, DataTable> tableCollection;
 	private Map<String, DataChart> chartCollection;
     private Integer tableNum = 1;
