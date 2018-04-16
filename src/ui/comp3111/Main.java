@@ -130,7 +130,7 @@ public class Main extends Application {
 
 
 
-		// ***Detailed Implementation of the menu bar
+		// ****Detailed Implementation of the menu bar
 		
 		//The file menu
 		Menu fileMenu = new Menu("File");
