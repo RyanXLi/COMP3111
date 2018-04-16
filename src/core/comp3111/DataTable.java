@@ -1,8 +1,9 @@
 package core.comp3111;
 
 import java.util.HashMap;
+
 import java.util.Map;
-import java.util.ArrayList;;
+import java.util.ArrayList;
 /**
  * 2D array of data values with the following requirements: (1) There are 0 to
  * many columns (2) The number of row for each column is the same (3) 2 columns
@@ -126,6 +127,12 @@ public class DataTable {
 	}
 	
 	
+	
+	public Map<String, DataColumn> getDataTable(){
+		return dc;
+	}
+	
+	
 	//**********************************************************************//
 	//Following is the filtering and transformation algorithm implementation.
 	//In these algorithms the dataTye of the target DataColumn is checked
@@ -147,7 +154,7 @@ public class DataTable {
 		switch(operator) {
 		
 		
-		case "biggerThan":
+		case ">":
 		    for(int i=0; i< getCol(colName).getSize();i++){
 			    if((double)targetData[i]>num) {
 				    keep.add(i);
@@ -155,14 +162,37 @@ public class DataTable {
 		    }
 		    break;
 				
-		case "smallerThan":
+		case "<":
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if((double)targetData[i]<num) {
 				    keep.add(i);
 			    }
 		    }
+		    break;	    
+		    
+		case ">=":
+		    for(int i=0; i< getCol(colName).getSize();i++){
+			    if((double)targetData[i]>=num) {
+				    keep.add(i);
+			    }
+		    }
 		    break;
-			
+				
+		case "<=":
+			for(int i=0; i< getCol(colName).getSize();i++){
+			    if((double)targetData[i]<=num) {
+				    keep.add(i);
+			    }
+		    }
+		    break;
+		    
+		case "==":
+			for(int i=0; i< getCol(colName).getSize();i++){
+			    if((double)targetData[i]==num) {
+				    keep.add(i);
+			    }
+		    }
+		    break;
 		default:
 			
 		}
@@ -192,8 +222,8 @@ public class DataTable {
 	
 	
 	
-	// This algorithm filter the datacolumn by tex label
-	public DataTable filterByLabel(String colName, String label, double num) throws DataTableException {
+	// This algorithm filter the datacolumn by text label
+	public DataTable filterByLabel(String colName, String label) throws DataTableException {
 		
 		DataTable result = new DataTable();
         
