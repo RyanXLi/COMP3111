@@ -1,20 +1,21 @@
 package core.comp3111;
 
 import java.io.*;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /*
  * This is a function to handle save and load of .comp3111
  * The inputs are current DataCollection function(S or L) 
  * and the filename(with .comp3111 as the end)
- * I wonder if I need to output something
  */
 
 public class EnvirHandler {
 	public DataCollection envirHandler(DataCollection dc, String filename, String function) {
 		
 		if (filename.substring(-9, -1) != ".comp3111") {
-			System.out.println("Such filename is not supported");
+			Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
+			alert.showAndWait();
 		}
 		
 		DataCollection output = new DataCollection();
@@ -36,16 +37,19 @@ public class EnvirHandler {
 					try {
 						oos.close();
 					} catch (IOException e) {
-						System.out.println("fail to close oos£º"+e.getMessage());
+						Alert alert = new Alert(AlertType.WARNING,"fail to close oos£º"+e.getMessage());
+						alert.showAndWait();
 					}
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("fail to create the file" + e.getMessage());
+				Alert alert = new Alert(AlertType.WARNING,"fail to create the file"+e.getMessage());
+				alert.showAndWait();
 			} finally{
 				try {
 					fos.close();
 				} catch (IOException e) {
-					System.out.println("fail to close the file"+e.getMessage());
+					Alert alert = new Alert(AlertType.WARNING,"fail to close the file"+e.getMessage());
+					alert.showAndWait();
 				}
 			}
 		} else if (function == "L") {
@@ -69,17 +73,20 @@ public class EnvirHandler {
 					try {
 						ois.close();
 					} catch (IOException e) {
-						System.out.println("fail to close ois" + e.getMessage());
+						Alert alert = new Alert(AlertType.WARNING,"fail to close ois"+e.getMessage());
+						alert.showAndWait();
 					}
 				}
 				
 			} catch (FileNotFoundException e) {
-				System.out.println("file not found: " + e.getMessage());
+				Alert alert = new Alert(AlertType.WARNING,"file not found"+e.getMessage());
+				alert.showAndWait();
 			} finally {
 				try {
 					fis.close();
 				} catch (IOException e) {
-					System.out.println("fail to close fis"+ e.getMessage());
+					Alert alert = new Alert(AlertType.WARNING,"fail to close fis"+e.getMessage());
+					alert.showAndWait();
 				}
 			}
 			
