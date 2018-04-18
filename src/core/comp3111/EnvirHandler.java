@@ -40,7 +40,7 @@ public class EnvirHandler {
 					}
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("fail to create the file"+e.getMessage());
+				System.out.println("fail to create the file" + e.getMessage());
 			} finally{
 				try {
 					fos.close();
@@ -49,7 +49,9 @@ public class EnvirHandler {
 				}
 			}
 		} else if (function == "L") {
-			File file2 = new File("3111save"+ File.separator + filename);
+			
+			File file2 = new File(filename);
+			
 			FileInputStream fis = null;
 			try {
 				fis = new FileInputStream(file2);

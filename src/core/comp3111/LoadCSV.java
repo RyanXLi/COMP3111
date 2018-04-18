@@ -37,6 +37,7 @@ public class LoadCSV {
 				
 				ColNum = ColNum + 1;
 			}
+			reader.close();
 		} catch (Exception e) {
 				System.out.println("Given fileName cannot be processed");
 		}
@@ -203,6 +204,8 @@ public class LoadCSV {
 			}
 			
 		}
+		
+		reader2.close();
 		
 		return result;
 	}
