@@ -1,10 +1,14 @@
 package core.comp3111;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 //
-public class DataCollection {
+public class DataCollection implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
 		chartCollection = new LinkedHashMap<String, DataChart>();
@@ -12,11 +16,17 @@ public class DataCollection {
 		chartNum=1;
 	}
 	
-	
+	DataCollection(DataCollection dc){
+		tableCollection = dc.tableCollection;
+		chartCollection = dc.chartCollection;
+		tableNum = dc.tableNum;
+		chartNum = dc.chartNum;
+	}
 	
 	public boolean containsTable(String tableName) {
 		return tableCollection.containsKey(tableName);
 	}
+	
 	public boolean containsChart(String chartName) {
 		return chartCollection.containsKey(chartName);
 	}
