@@ -9,6 +9,7 @@ import core.comp3111.LoadCSV;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.File;
 
@@ -18,9 +19,5 @@ import java.io.File;
  *
  */
 class LoadCSVTest {  
-     File file = new File("LoadCSVTest.txt");  
-     PrintStream ps = new PrintStream(new FileOutputStream(file));  
-     ps.
-     ps.append("http://www.docin.com/p-315288370.html");    
-
+     
 }

@@ -1,0 +1,154 @@
+package ui.comp3111;
+
+import core.comp3111.DataTable;
+import core.comp3111.DataTableException;
+import core.comp3111.LoadCSV;
+import core.comp3111.DataCollection;
+
+import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.TextField;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+public class ImportCsvScene {
+	
+	public static Scene importCsv(Stage primaryStage, String dtName) {
+		
+		DataTable dt = new DataTable(); 
+		
+		
+		// Radio button
+		ToggleGroup group = new ToggleGroup();
+
+		RadioButton rb1 = new RadioButton("default filling");
+		rb1.setToggleGroup(group);
+		rb1.setSelected(true);
+		rb1.relocate(120, 250);
+				
+		RadioButton rb2 = new RadioButton("median filling");
+		rb2.setToggleGroup(group);
+		rb2.relocate(150, 250);
+		
+		RadioButton rb3 = new RadioButton("mean filling");
+		rb2.setToggleGroup(group);
+		rb2.relocate(180, 290);
+		
+		
+		
+		// TextField
+		TextField filename = new TextField ();
+		filename.setPromptText("Enter a .csv filename");
+		filename.relocate(150, 180);
+		
+		// file chooser button
+		Button filechooser = new Button("Choose from local file");
+		filechooser.setOnAction(e->{
+			FileChooser fc = new FileChooser();
+			fc.setTitle("Open Localfile .csv");
+			File file = fc.showOpenDialog(primaryStage);
+			filename.clear();
+			filename.appendText(file.getName());
+		});
+		filechooser.relocate(150,250);
+		
+		
+		
+		// OK button
+		Button OK= new Button("OK");
+		filechooser.setOnAction(e->{
+			DataTable result = new DataTable();
+			
+			String handleType = "Default";
+			if(rb2.isSelected()) {
+				handleType = "Median";
+			} else if(rb3.isSelected()) {
+				handleType = "Mean";
+			}
+			
+			try {
+				result = LoadCSV.loadCSV(filename.getText(), handleType);
+				Main.dtcl.addDataTable(result);
+			} catch (IOException | DataTableException e1) {
+				e1.printStackTrace();
+			}
+			primaryStage.setScene(Main.primaryScene(primaryStage));
+		});
+	    OK.relocate(400, 310);
+	    
+		
+		// Back button
+		Button back= new Button("back");
+		back.setOnAction(e->{primaryStage.setScene(Main.primaryScene(primaryStage));});
+		back.relocate(440, 310);
+		
+		
+		// labels
+		Label label1= new Label("Filename");
+		label1.setStyle("-fx-font-weight: bold");
+		label1.relocate(30, 30);
+		
+		Label label2= new Label("Choose your missing data handle type");
+		label2.relocate(70, 90);
+		
+		
+	    Pane ics1 = new Pane();
+	    ics1.getChildren().addAll(label1,label2,filename);
+		ics1.getChildren().addAll(rb1,rb2,rb3,OK,back,filechooser);
+		
+		
+		Scene importCsvScene = new Scene(ics1,500,350,Color.WHITE);
+		
+		return importCsvScene;
+	}
+
+}

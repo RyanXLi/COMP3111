@@ -16,7 +16,7 @@ import java.util.*;
 
 public class LoadCSV {
 
-	public DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
+	public static DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
 		
 		DataTable result = new DataTable();
 		int RowNum = 0;
