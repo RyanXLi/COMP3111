@@ -11,12 +11,7 @@ import javafx.scene.control.Alert.AlertType;
  */
 
 public class EnvirHandler {
-	public DataCollection envirHandler(DataCollection dc, String filename, String function) {
-		
-		if (filename.substring(-9, -1) != ".comp3111") {
-			Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
-			alert.showAndWait();
-		}
+	public static DataCollection envirHandler(DataCollection dc, String filename, String function) {
 		
 		DataCollection output = new DataCollection();
 		

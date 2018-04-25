@@ -16,7 +16,7 @@ import java.util.*;
 
 public class SaveCSV {
 
-	public static void loadCSV(String fileName, DataTable source) throws IOException, DataTableException {
+	public static void saveCSV(String fileName, DataTable source) throws IOException, DataTableException {
 		
 		Map<String, DataColumn> result = new HashMap<>(source.getMap());
 		

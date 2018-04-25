@@ -2,7 +2,9 @@ package ui.comp3111;
 
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
+import core.comp3111.EnvirHandler;
 import core.comp3111.LoadCSV;
+import core.comp3111.SaveCSV;
 import core.comp3111.DataCollection;
 
 import java.util.ArrayList;
@@ -60,41 +62,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ImportCsvScene {
+public class Import3111Scene {
 	
-	public static Scene importCsv(Stage primaryStage, String dtName) {
+	public static Scene import3111(Stage primaryStage, String dtName) {
 		
-		DataTable dt = new DataTable(); 
-		
-		
-		// Radio button
-		ToggleGroup group = new ToggleGroup();
-
-		RadioButton rb1 = new RadioButton("default filling");
-		rb1.setToggleGroup(group);
-		rb1.setSelected(true);
-		rb1.relocate(150, 180);
-				
-		RadioButton rb2 = new RadioButton("median filling");
-		rb2.setToggleGroup(group);
-		rb2.relocate(150, 210);
-		
-		RadioButton rb3 = new RadioButton("mean filling");
-		rb3.setToggleGroup(group);
-		rb3.relocate(150, 240);
-		
-		
+		DataTable dt = Main.dtcl.getDataTable(dtName); 		
 		
 		// TextField
 		TextField filename = new TextField ();
-		filename.setPromptText("Enter a .csv filename");
+		filename.setPromptText("Enter a .comp3111 filename");
 		filename.relocate(150, 80);
 		
 		// file chooser button
 		FileChooser fc = new FileChooser();
 		Button filechooser = new Button("Choose from local file");
 		filechooser.setOnAction(e->{
-			fc.setTitle("Open Localfile .csv");
+			fc.setTitle("Subsititude Localfile .csv");
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
@@ -108,30 +91,11 @@ public class ImportCsvScene {
 		// OK button
 		Button OK= new Button("OK");
 		OK.setOnAction(e->{
-			DataTable result = new DataTable();
-			
-			String handleType = "Default";
-			if(rb2.isSelected()) {
-				handleType = "Median";
-			} else if(rb3.isSelected()) {
-				handleType = "Mean";
-			}
-			
-			try {
-				if (!filename.getText().endsWith(".csv")) {
-					Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
-					alert.showAndWait();
-				} else {
-				result = LoadCSV.loadCSV(filename.getText(), handleType);
-				}
-				if (result.getNumCol() == 0) {
-					Alert alert = new Alert(AlertType.WARNING,"Given file cannot be processed");
-					alert.showAndWait();
-				} else {
-					Main.dtcl.addDataTable(result);
-				}
-			} catch (IOException | DataTableException e1) {
-				e1.printStackTrace();
+			if (!filename.getText().endsWith(".comp3111")) {
+				Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
+				alert.showAndWait();
+			} else {
+			EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "S");
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});
@@ -149,19 +113,16 @@ public class ImportCsvScene {
 		label1.setStyle("-fx-font-weight: bold");
 		label1.relocate(80, 80);
 		
-		Label label2= new Label("Choose your missing data handle type");
-		label2.relocate(80, 150);
-		
 		
 	    Pane ics1 = new Pane();
-	    ics1.getChildren().addAll(label1,label2);
+	    ics1.getChildren().addAll(label1);
 	    ics1.getChildren().addAll(filename);
-		ics1.getChildren().addAll(rb1,rb2,rb3,OK,back,filechooser);
+		ics1.getChildren().addAll(OK,back,filechooser);
 		
 		
-		Scene importCsvScene = new Scene(ics1,500,350,Color.WHITE);
+		Scene import3111Scene = new Scene(ics1,500,350,Color.WHITE);
 		
-		return importCsvScene;
+		return import3111Scene;
 	}
 
 }
