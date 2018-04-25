@@ -135,11 +135,12 @@ public class Main extends Application {
 		//The file menu
 		Menu fileMenu = new Menu("File");
 		MenuItem importMenuItem = new MenuItem("import from CSV");
+		MenuItem exportMenuItem = new MenuItem("export as CSV");
 		MenuItem saveMenuItem = new MenuItem("save as 3111");
 		MenuItem loadMenuItem = new MenuItem("import from 3111");
 		
 		fileMenu.getItems().addAll(importMenuItem, loadMenuItem,
-		     saveMenuItem);
+		     saveMenuItem,exportMenuItem);
 		
 		//The filter menu, enabled only when a datatable is selected
 		Menu filterMenu = new Menu("Filter");

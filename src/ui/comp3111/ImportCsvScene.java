@@ -37,6 +37,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -48,12 +49,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.TextField;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -91,9 +91,9 @@ public class ImportCsvScene {
 		filename.relocate(150, 180);
 		
 		// file chooser button
+		FileChooser fc = new FileChooser();
 		Button filechooser = new Button("Choose from local file");
 		filechooser.setOnAction(e->{
-			FileChooser fc = new FileChooser();
 			fc.setTitle("Open Localfile .csv");
 			File file = fc.showOpenDialog(primaryStage);
 			filename.clear();
@@ -105,7 +105,7 @@ public class ImportCsvScene {
 		
 		// OK button
 		Button OK= new Button("OK");
-		filechooser.setOnAction(e->{
+		OK.setOnAction(e->{
 			DataTable result = new DataTable();
 			
 			String handleType = "Default";
@@ -117,7 +117,12 @@ public class ImportCsvScene {
 			
 			try {
 				result = LoadCSV.loadCSV(filename.getText(), handleType);
-				Main.dtcl.addDataTable(result);
+				if (result.getNumCol() == 0) {
+					Alert alert = new Alert(AlertType.WARNING,"Given file cannot be processed");
+					alert.showAndWait();
+				} else {
+					Main.dtcl.addDataTable(result);
+				}
 			} catch (IOException | DataTableException e1) {
 				e1.printStackTrace();
 			}
@@ -142,7 +147,8 @@ public class ImportCsvScene {
 		
 		
 	    Pane ics1 = new Pane();
-	    ics1.getChildren().addAll(label1,label2,filename);
+	    ics1.getChildren().addAll(label1,label2);
+	    ics1.getChildren().addAll(filename);
 		ics1.getChildren().addAll(rb1,rb2,rb3,OK,back,filechooser);
 		
 		

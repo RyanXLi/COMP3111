@@ -22,7 +22,11 @@ public class LoadCSV {
 		int RowNum = 0;
 		int ColNum = 0;
 		
-		
+		try {
+			FileReader fr = new FileReader(fileName);
+		} catch(Exception e) {
+			return result;
+		}
 		
 		// Find the size of the table
 		try {
@@ -40,6 +44,7 @@ public class LoadCSV {
 			reader.close();
 		} catch (Exception e) {
 				System.out.println("Given fileName cannot be processed");
+				return result;
 		}
 		
 		
