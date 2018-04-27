@@ -14,8 +14,10 @@ public class EnvirHandler {
 	public static DataCollection envirHandler(DataCollection dc, String filename, String function) {
 		
 		DataCollection output = new DataCollection();
+		// the filename problem is handled in the UI by checking the last digits
 		
 		if (function == "S") {
+			// create a file folder for data collection
 			File file = new File("3111save"+ File.separator + filename);
 			FileOutputStream fos = null;
 			
