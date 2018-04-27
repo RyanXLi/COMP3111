@@ -89,12 +89,18 @@ public class Import3111Scene {
 		// OK button
 		Button OK= new Button("OK");
 		OK.setOnAction(e->{
-			DataCollection temp;
+			DataCollection temp = new DataCollection();
 			if (!filename.getText().endsWith(".comp3111")) {
 				Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported, please end with .comp3111");
 				alert.showAndWait();
 			} else {
-				temp = EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "L");
+				try {
+					temp = EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "L");
+				} catch (ClassNotFoundException | IOException e1) {
+					Alert alert = new Alert(AlertType.WARNING,"Wrong Content in the file!");
+					alert.showAndWait();
+					e1.printStackTrace();
+				}
 				Main.dtcl = temp;
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));

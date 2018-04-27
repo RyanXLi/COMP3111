@@ -95,7 +95,13 @@ public class Export3111Scene {
 				Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
 				alert.showAndWait();
 			} else {
-			EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "S");
+			try {
+				EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "S");
+			} catch (ClassNotFoundException | IOException e1) {
+				Alert alert = new Alert(AlertType.WARNING,"Wrong Content in the file!");
+				alert.showAndWait();
+				e1.printStackTrace();
+			}
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});

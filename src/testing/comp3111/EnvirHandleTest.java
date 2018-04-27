@@ -59,9 +59,4 @@ class EnvirHandleTest {
 		assert(test.getDataTable("DataTable1").containsColumn("testStringColumn"));
 		
 	}  
-	
-	@Test
-	void exceptionTest() {
-		
-	}
 }
