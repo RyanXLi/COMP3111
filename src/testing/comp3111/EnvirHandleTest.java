@@ -28,34 +28,40 @@ import java.io.File;
  *
  */
 class EnvirHandleTest {  
-	DataColumn testDataColumn;
+	//DataColumn testDataColumn;
 	DataTable dataTable;
 	DataColumn testStringColumn;
-	DataCollection dc;
-	DataCollection test;
+	DataCollection dc= new DataCollection();
+	DataCollection test = new DataCollection();
     
 	@BeforeEach
     void init() {
-    	testDataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2,3});
+    	//testDataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2,3});
     	testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"1","2","3"});
     	dataTable= new DataTable();
     }
     
+	 @Test
+	    void testConstructor() {
+	    	EnvirHandler x = new EnvirHandler();
+	    	assert(x.init == "Success");
+	    }
+	
 	@Test
-	void writeFileTest() throws DataTableException, IOException {
-		dataTable.addCol("testDataColumn", testDataColumn);
+	void writeFileTest() throws DataTableException, IOException, ClassNotFoundException {
+		//dataTable.addCol("testDataColumn", testDataColumn);
 		dataTable.addCol("testStringColumn", testStringColumn);
-		dc.addDataTable(dataTable);
+		dc.addDataTable(dataTable);;
 		
 		EnvirHandler.envirHandler(dc, "test.comp3111", "S");
+		
 		test = EnvirHandler.envirHandler(dc, "test.comp3111", "L");
+		assert(test.getDataTable("DataTable1").containsColumn("testStringColumn"));
+		
+	}  
+	
+	@Test
+	void exceptionTest() {
 		
 	}
-	
-		
-	
-		
-		
-	
-    
 }
