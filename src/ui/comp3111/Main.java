@@ -142,6 +142,8 @@ public class Main extends Application {
 		fileMenu.getItems().addAll(importMenuItem,exportMenuItem, loadMenuItem,saveMenuItem
 		     );
 		
+		exportMenuItem.disableProperty().bind(dataTableList.getSelectionModel().selectedItemProperty().isNull());
+		
 		//The filter menu, enabled only when a datatable is selected
 		Menu filterMenu = new Menu("Filter");
 		MenuItem filterNumMenuItem = new MenuItem("Numeric");

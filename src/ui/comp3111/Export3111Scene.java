@@ -65,7 +65,9 @@ import javafx.stage.Stage;
 public class Export3111Scene {
 	
 	public static Scene export3111(Stage primaryStage, String dtName) {
-			
+		
+		DataTable dt = Main.dtcl.getDataTable(dtName); 		
+		
 		// TextField
 		TextField filename = new TextField ();
 		filename.setPromptText("Enter a .comp3111 filename");
@@ -89,13 +91,11 @@ public class Export3111Scene {
 		// OK button
 		Button OK= new Button("OK");
 		OK.setOnAction(e->{
-			DataCollection temp;
 			if (!filename.getText().endsWith(".comp3111")) {
 				Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
 				alert.showAndWait();
 			} else {
-				temp = EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "L");
-				Main.dtcl = temp;
+			EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "S");
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});

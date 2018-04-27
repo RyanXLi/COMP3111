@@ -18,16 +18,17 @@ public class EnvirHandler {
 		
 		if (function == "S") {
 			// create a file folder for data collection
-			File file = new File("3111save"+ File.separator + filename);
+			
 			FileOutputStream fos = null;
 			
 			// Serialize the objects and put them in the oos
 			try {
-				fos = new FileOutputStream(file);
+				fos = new FileOutputStream(filename);
 				ObjectOutputStream oos = null;
 				try {
 					oos = new ObjectOutputStream(fos);
-					oos.writeObject(dc);
+					DataCollection temp = dc;
+					oos.writeObject(temp);
 					oos.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -53,11 +54,10 @@ public class EnvirHandler {
 			
 		} else if (function == "L") {
 			// import the objects to oos and make a new dataCollection through it
-			File file2 = new File(filename);
 			
 			FileInputStream fis = null;
 			try {
-				fis = new FileInputStream(file2);
+				fis = new FileInputStream(filename);
 				ObjectInputStream ois = null;
 				try {
 					ois = new ObjectInputStream(fis);
@@ -95,5 +95,10 @@ public class EnvirHandler {
 		return output;
 		
 	}
-
+	
+	// A constructor for test coverage
+			public EnvirHandler(){
+				init = "Success";
+			}
+		public String init;
 }

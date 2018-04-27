@@ -122,6 +122,7 @@ public class ImportCsvScene {
 					Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
 					alert.showAndWait();
 				} else {
+				
 				result = LoadCSV.loadCSV(filename.getText(), handleType);
 				}
 				if (result.getNumCol() == 0) {

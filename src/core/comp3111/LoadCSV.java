@@ -226,4 +226,10 @@ public class LoadCSV {
 		
 		return true;
 	}
+	
+	// A constructor for test coverage
+			public LoadCSV(){
+				init = "Success";
+			}
+		public String init;
 }
