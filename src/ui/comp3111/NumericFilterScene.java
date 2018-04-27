@@ -1,6 +1,8 @@
 package ui.comp3111;
 
 import core.comp3111.DataTable;
+import core.comp3111.DataTableException;
+
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -108,8 +110,10 @@ public class NumericFilterScene {
 	    String operator = opBox.getSelectionModel().getSelectedItem();
 	    String num = setNumber.getText();
 	    boolean handleMode = rb1.isSelected();
-	    OK.setOnAction(e->{Main.dtcl.numFilter(dtName, colName,operator,num, handleMode);
-                primaryStage.setScene(Main.primaryScene(primaryStage));});
+	    OK.setOnAction(e->{try {
+			Main.dtcl.numFilter(dtName, colName,operator,num, handleMode);}
+	        catch (DataTableException e1) {}
+            primaryStage.setScene(Main.primaryScene(primaryStage));});
 		
 		// Back button
 		Button back= new Button("back");

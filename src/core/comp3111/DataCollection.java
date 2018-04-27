@@ -88,14 +88,11 @@ public class DataCollection {
 	
 	//NumberFormatException, DataTableException 
 	public void numFilter(String dtName, String colName, String op, String num, 
-			boolean handleMode){
+			boolean handleMode) throws DataTableException{
 		DataTable originDT = tableCollection.get(dtName);
 		DataTable resultDT = new DataTable();
-        try{resultDT = originDT.filterByOperator(colName, op, Double.parseDouble(num));}
-        catch(NumberFormatException e1){
-        	return;
-        }
-        catch(DataTableException e2) {
+        try{resultDT = originDT.filterByOperator(colName, op, Double.parseDouble(num.toString()));}
+        catch(NumberFormatException e3) {
         	return;
         }
         if(handleMode==true) {
@@ -105,11 +102,10 @@ public class DataCollection {
         return;
 	}
 	
-	public void textFilter(String dtName, String colName, String text, boolean handleMode) {
+	public void textFilter(String dtName, String colName, String text, boolean handleMode) throws DataTableException {
 		DataTable originDT = tableCollection.get(dtName);
 		DataTable resultDT = new DataTable();
-		try {resultDT = originDT.filterByLabel(colName, text);}
-		catch(DataTableException e1) { return; }
+		resultDT = originDT.filterByLabel(colName, text);
 		if(handleMode==true) {
 	      	removeDataTable(dtName);
 	    }
