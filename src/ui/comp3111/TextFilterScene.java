@@ -3,6 +3,7 @@ package ui.comp3111;
 import java.util.ArrayList;
 
 import core.comp3111.DataTable;
+import core.comp3111.DataTableException;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -68,8 +69,9 @@ public static Scene textFilter(Stage primaryStage, String dtName) {
 		String colName = colBox.getSelectionModel().getSelectedItem();
 		String text = setText.getText();
 		boolean handleMode = rb1.isSelected();
-		OK.setOnAction(e->{Main.dtcl.textFilter(dtName,colName , text, handleMode);
-		        primaryStage.setScene(Main.primaryScene(primaryStage));});
+		OK.setOnAction(e->{try {Main.dtcl.textFilter(dtName,colName , text, handleMode);}
+		               catch (DataTableException e1) {}
+		               primaryStage.setScene(Main.primaryScene(primaryStage));});
 		
 		// Back button
 		Button back= new Button("back");
