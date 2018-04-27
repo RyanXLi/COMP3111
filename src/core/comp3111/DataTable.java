@@ -26,6 +26,7 @@ public class DataTable {
 		dc = new HashMap<String, DataColumn>();
 	}
 
+	
 	/**
 	 * Add a data column to the table.
 	 * 
@@ -271,5 +272,17 @@ public class DataTable {
 	// KeyType: String
 	// ValueType: DataColumn
 	private Map<String, DataColumn> dc;
+
+
+
+
+	public Map<String, DataColumn> getMap() {
+		Map<String, DataColumn> temp = dc;	
+		return temp;		
+	}
+
+
+
+
 
 }

@@ -139,8 +139,8 @@ public class Main extends Application {
 		MenuItem saveMenuItem = new MenuItem("save as 3111");
 		MenuItem loadMenuItem = new MenuItem("import from 3111");
 		
-		fileMenu.getItems().addAll(importMenuItem, exportMenuItem, loadMenuItem,
-		     saveMenuItem);
+		fileMenu.getItems().addAll(importMenuItem,exportMenuItem, loadMenuItem,saveMenuItem
+		     );
 		
 		//The filter menu, enabled only when a datatable is selected
 		Menu filterMenu = new Menu("Filter");
@@ -148,6 +148,16 @@ public class Main extends Application {
 		MenuItem filterTextMenuItem = new MenuItem("Text");
 		filterMenu.getItems().addAll(filterNumMenuItem,filterTextMenuItem);
 		filterMenu.disableProperty().bind(dataTableList.getSelectionModel().selectedItemProperty().isNull());
+		
+		importMenuItem.setOnAction(e->{primaryStage.setScene(
+				ImportCsvScene.importCsv(primaryStage,dataTableList.getSelectionModel().getSelectedItem()));});
+		exportMenuItem.setOnAction(e->{primaryStage.setScene(
+				ExportCsvScene.exportCsv(primaryStage,dataTableList.getSelectionModel().getSelectedItem()));});
+		loadMenuItem.setOnAction(e->{primaryStage.setScene(
+				Import3111Scene.import3111(primaryStage,dataTableList.getSelectionModel().getSelectedItem()));});
+		saveMenuItem.setOnAction(e->{primaryStage.setScene(
+				Export3111Scene.export3111(primaryStage,dataTableList.getSelectionModel().getSelectedItem()));});
+
 		
 		filterNumMenuItem.setOnAction(e->{primaryStage.setScene(
 				NumericFilterScene.numericFilter(primaryStage,dataTableList.getSelectionModel().getSelectedItem()));});

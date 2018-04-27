@@ -16,13 +16,17 @@ import java.util.*;
 
 public class LoadCSV {
 
-	public DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
+	public static DataTable loadCSV(String fileName, String handleType) throws IOException, DataTableException {
 		
 		DataTable result = new DataTable();
 		int RowNum = 0;
 		int ColNum = 0;
 		
-		
+		try {
+			FileReader fr = new FileReader(fileName);
+		} catch(Exception e) {
+			return result;
+		}
 		
 		// Find the size of the table
 		try {
@@ -40,6 +44,7 @@ public class LoadCSV {
 			reader.close();
 		} catch (Exception e) {
 				System.out.println("Given fileName cannot be processed");
+				return result;
 		}
 		
 		
@@ -126,6 +131,7 @@ public class LoadCSV {
 		for (int i = 0; i < RowNum; i++) {
 			
 			if (typeMap.get(i) == "Number") {
+				
 				ArrayList<Double> temp = new ArrayList<>();
 				// get the numbers
 				for (int j = 0; j < csvList.size(); j++) {

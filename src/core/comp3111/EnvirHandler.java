@@ -11,12 +11,7 @@ import javafx.scene.control.Alert.AlertType;
  */
 
 public class EnvirHandler {
-	public DataCollection envirHandler(DataCollection dc, String filename, String function) {
-		
-		if (filename.substring(-9, -1) != ".comp3111") {
-			Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
-			alert.showAndWait();
-		}
+	public static DataCollection envirHandler(DataCollection dc, String filename, String function) {
 		
 		DataCollection output = new DataCollection();
 		
@@ -24,6 +19,7 @@ public class EnvirHandler {
 			File file = new File("3111save"+ File.separator + filename);
 			FileOutputStream fos = null;
 			
+			// Serialize the objects and put them in the oos
 			try {
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos = null;
@@ -52,8 +48,9 @@ public class EnvirHandler {
 					alert.showAndWait();
 				}
 			}
-		} else if (function == "L") {
 			
+		} else if (function == "L") {
+			// import the objects to oos and make a new dataCollection through it
 			File file2 = new File(filename);
 			
 			FileInputStream fis = null;
