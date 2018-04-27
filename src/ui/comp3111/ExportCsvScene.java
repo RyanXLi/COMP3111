@@ -93,7 +93,7 @@ public class ExportCsvScene {
 			DataTable result = dt;
 			try {
 				if (!filename.getText().endsWith(".csv")) {
-					Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
+					Alert alert = new Alert(AlertType.WARNING,"Please give a filename ends with .csv");
 					alert.showAndWait();
 				} else {
 				SaveCSV.saveCSV(filename.getText(), result);
@@ -103,6 +103,7 @@ public class ExportCsvScene {
 				alert.showAndWait();
 				e1.printStackTrace();
 			}
+			Alert alert = new Alert(AlertType.WARNING,"Successfully saved!");
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});
 	    OK.relocate(400, 310);

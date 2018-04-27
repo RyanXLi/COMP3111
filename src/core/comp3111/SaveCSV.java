@@ -20,9 +20,11 @@ public class SaveCSV {
 		
 		Map<String, DataColumn> result = new HashMap<>(source.getMap());
 		
+		// File name problem has been settled in the UI
 		File csv = new File(fileName); 
         BufferedWriter bw = new BufferedWriter(new FileWriter(csv)); 
 		
+        // Write the i th digit of the DataColumn line-by-line
 		for (int i = 1; i <= source.getNumCol(); i++) {
 			for (Map.Entry<String, DataColumn> entry: result.entrySet()) {
 					Object[] temp = ((DataColumn) entry).getData();// Current Data Column

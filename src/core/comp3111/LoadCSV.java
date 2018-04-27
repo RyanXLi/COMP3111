@@ -131,6 +131,7 @@ public class LoadCSV {
 		for (int i = 0; i < RowNum; i++) {
 			
 			if (typeMap.get(i) == "Number") {
+				
 				ArrayList<Double> temp = new ArrayList<>();
 				// get the numbers
 				for (int j = 0; j < csvList.size(); j++) {

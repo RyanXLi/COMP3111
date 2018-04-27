@@ -19,6 +19,7 @@ public class EnvirHandler {
 			File file = new File("3111save"+ File.separator + filename);
 			FileOutputStream fos = null;
 			
+			// Serialize the objects and put them in the oos
 			try {
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos = null;
@@ -47,8 +48,9 @@ public class EnvirHandler {
 					alert.showAndWait();
 				}
 			}
-		} else if (function == "L") {
 			
+		} else if (function == "L") {
+			// import the objects to oos and make a new dataCollection through it
 			File file2 = new File(filename);
 			
 			FileInputStream fis = null;
