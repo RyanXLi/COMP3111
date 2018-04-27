@@ -1,5 +1,6 @@
 package core.comp3111;
 
+
 import java.util.HashMap;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  *
  */
 public class DataTable {
+
 
 	/**
 	 * Construct - Create an empty DataTable
@@ -139,63 +141,59 @@ public class DataTable {
 	//In these algorithms the dataTye of the target DataColumn is checked
 	//before doing transformations
 	
-	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException {
-		
+	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException, NumberFormatException {
+
 		DataTable result = new DataTable();
         
 		// In case the DataTable is empty
 		int rowNum= getNumRow();
 		if(rowNum<=0) return result;
-				
-		
+	    //Operator op = Operator.getEnum(operator);
+	
 		Object[] targetData= getCol(colName).getData();
 		ArrayList<Integer> keep= new ArrayList<Integer>();
 		
 		//find out which element to keep in the new DataTable;
-		switch(operator) {
 		
 		
-		case ">":
+		
+		
+		if(operator==">") {
 		    for(int i=0; i< getCol(colName).getSize();i++){
-			    if((double)targetData[i]>num) {
+			    if(Double.parseDouble(targetData[i].toString())>num) {
 				    keep.add(i);
 			    }
 		    }
-		    break;
-				
-		case "<":
+		}		
+		else if(operator=="<") {
 			for(int i=0; i< getCol(colName).getSize();i++){
-			    if((double)targetData[i]<num) {
+			    if(Double.parseDouble(targetData[i].toString())<num) {
 				    keep.add(i);
 			    }
 		    }
-		    break;	    
-		    
-		case ">=":
+		}
+		else if(operator==">=") {
 		    for(int i=0; i< getCol(colName).getSize();i++){
-			    if((double)targetData[i]>=num) {
+			    if(Double.parseDouble(targetData[i].toString())>=num) {
 				    keep.add(i);
 			    }
 		    }
-		    break;
-				
-		case "<=":
+		}		
+		else if(operator=="<=")
 			for(int i=0; i< getCol(colName).getSize();i++){
-			    if((double)targetData[i]<=num) {
+			    if(Double.parseDouble(targetData[i].toString())<=num) {
 				    keep.add(i);
 			    }
-		    }
-		    break;
-		    
-		case "==":
+		    }		    
+		else if(operator=="=="){
 			for(int i=0; i< getCol(colName).getSize();i++){
-			    if((double)targetData[i]==num) {
+			    if(Double.parseDouble(targetData[i].toString())==num) {
 				    keep.add(i);
 			    }
 		    }
-		    break;
-		default:
-			
+		}
+		else {
+			return result;
 		}
 		
 		
@@ -238,7 +236,7 @@ public class DataTable {
 		
 		//find out which element to keep in the new DataTable;
 		for(int i=0; i<getCol(colName).getSize();i++) {
-			if(label.equalsIgnoreCase((String)targetData[i])) {
+			if(label.equalsIgnoreCase(targetData[i].toString())) {
 				keep.add(i);
 			}
 		}
@@ -286,3 +284,6 @@ public class DataTable {
 
 
 }
+
+
+
