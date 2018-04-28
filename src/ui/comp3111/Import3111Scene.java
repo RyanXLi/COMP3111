@@ -63,7 +63,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Import3111Scene {
-	
+	/**
+	 * Scene for import 3111 button
+	 * 
+	 * @param Stage
+	 *            - original main stage
+	 * @param dtName
+	 *            - the DataTable you want to save
+	 */
 	public static Scene import3111(Stage primaryStage, String dtName) {
 			
 		// TextField
@@ -75,7 +82,7 @@ public class Import3111Scene {
 		FileChooser fc = new FileChooser();
 		Button filechooser = new Button("Choose from local file");
 		filechooser.setOnAction(e->{
-			fc.setTitle("Subsititude Localfile .csv");
+			fc.setTitle("Subsititude Localfile .comp3111");
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();

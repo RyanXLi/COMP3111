@@ -16,6 +16,18 @@ import java.util.*;
 
 public class SaveCSV {
 	
+	/**
+	 * Save a dataTable to .csv.
+	 * 
+	 * @param filename
+	 *            - the name you want, or the file you want to replace
+	 * @param source
+	 *            - the DataTable you want to save
+	 * @throws DataTableException,IOException
+	 *             - It throws DataTableException if a column is already exist, or
+	 *             the row size does not match.
+	 *             - It throws IOException if the file cannot be open or cannot be written
+	 */
 	public static void saveCSV(String fileName, DataTable source) throws IOException, DataTableException {
 		
 		ArrayList<DataColumn> result = source.getDataTableCols();
