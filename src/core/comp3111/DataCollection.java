@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import ui.comp3111.DataChart;
+
 //
 public class DataCollection implements Serializable{
 	

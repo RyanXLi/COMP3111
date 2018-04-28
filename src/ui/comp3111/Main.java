@@ -1,7 +1,6 @@
 package ui.comp3111;
 
 import core.comp3111.DataCollection;
-import core.comp3111.DataChart;
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
 import core.comp3111.DataType;
@@ -71,7 +70,8 @@ public class Main extends Application {
 			 
         DataTable dt1 = new DataTable();
 		dtcl.addDataTable(dt1);
-		DataChart dc1 = new DataChart();
+		
+        DataChart dc1 = new LineDataChart();
 		dtcl.addDataChart(dc1);
 
 	    primaryStage.setScene(primaryScene(primaryStage));
@@ -123,6 +123,9 @@ public class Main extends Application {
 		//"View chart" button, enabled only when a chart is selected.
 		Button button = new Button("View chart");
 		button.disableProperty().bind(chartList.getSelectionModel().selectedItemProperty().isNull());
+		button.setOnAction(e->{
+			dtcl.getDataChart(chartList.getSelectionModel().getSelectedItem()).draw(primaryStage);;
+		});
 		StackPane stack3=new StackPane();
 		stack3.getChildren().add(button);
 		stack3.setLayoutX(480);
