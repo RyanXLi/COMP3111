@@ -59,6 +59,7 @@ class SaveCSVTest {
 		trueList.add("2,2");
 		trueList.add("3,3");
 		reader.close();
+		
 		assert(trueList.equals(testList));
 	}
 	

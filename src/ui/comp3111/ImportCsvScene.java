@@ -44,11 +44,15 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 import java.awt.Desktop;
 import java.awt.EventQueue;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.processing.FilerException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -121,10 +125,11 @@ public class ImportCsvScene {
 				if (!filename.getText().endsWith(".csv")) {
 					Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
 					alert.showAndWait();
-				} else {
-				
-				result = LoadCSV.loadCSV(filename.getText(), handleType);
+					primaryStage.setScene(Main.primaryScene(primaryStage));
+				} else {	
+					result = LoadCSV.loadCSV(filename.getText(), handleType);
 				}
+				
 				if (result.getNumCol() == 0) {
 					Alert alert = new Alert(AlertType.WARNING,"Given file cannot be processed");
 					alert.showAndWait();
