@@ -120,9 +120,13 @@ public class ExportCsvScene {
 		label1.setStyle("-fx-font-weight: bold");
 		label1.relocate(80, 80);
 		
+		Label label2= new Label("File format should be xxx.csv");
+		label2.setStyle("-fx-font-weight: bold");
+		label2.relocate(150, 140);
+		
 		
 	    Pane ics1 = new Pane();
-	    ics1.getChildren().addAll(label1);
+	    ics1.getChildren().addAll(label1, label2);
 	    ics1.getChildren().addAll(filename);
 		ics1.getChildren().addAll(OK,back,filechooser);
 		

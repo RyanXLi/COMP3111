@@ -1,5 +1,7 @@
 package core.comp3111;
 
+import java.io.Serializable;
+
 /**
  * DataColumn - A column of data. This class will be used by DataTable. It
  * stores the data values (data) and the its type (typeName). String constants
@@ -8,8 +10,9 @@ package core.comp3111;
  * @author cspeter
  *
  */
-public class DataColumn {
-
+public class DataColumn implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Constructor. Create an empty data column
 	 */

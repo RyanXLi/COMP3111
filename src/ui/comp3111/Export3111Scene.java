@@ -65,7 +65,9 @@ import javafx.stage.Stage;
 public class Export3111Scene {
 	
 	public static Scene export3111(Stage primaryStage, String dtName) {
-			
+		
+		DataTable dt = Main.dtcl.getDataTable(dtName); 		
+		
 		// TextField
 		TextField filename = new TextField ();
 		filename.setPromptText("Enter a .comp3111 filename");
@@ -89,13 +91,17 @@ public class Export3111Scene {
 		// OK button
 		Button OK= new Button("OK");
 		OK.setOnAction(e->{
-			DataCollection temp;
 			if (!filename.getText().endsWith(".comp3111")) {
 				Alert alert = new Alert(AlertType.WARNING,"Such filename is not supported");
 				alert.showAndWait();
 			} else {
-				temp = EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "L");
-				Main.dtcl = temp;
+			try {
+				EnvirHandler.envirHandler(Main.dtcl, filename.getText(), "S");
+			} catch (ClassNotFoundException | IOException e1) {
+				Alert alert = new Alert(AlertType.WARNING,"Wrong Content in the file!");
+				alert.showAndWait();
+				e1.printStackTrace();
+			}
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});
@@ -112,10 +118,13 @@ public class Export3111Scene {
 		Label label1= new Label("Filename");
 		label1.setStyle("-fx-font-weight: bold");
 		label1.relocate(80, 80);
+		Label label2= new Label("file format should be xxx.comp3111");
+		label1.setStyle("-fx-font-weight: bold");
+		label1.relocate(150, 140);
 		
 		
 	    Pane ics1 = new Pane();
-	    ics1.getChildren().addAll(label1);
+	    ics1.getChildren().addAll(label1, label2);
 	    ics1.getChildren().addAll(filename);
 		ics1.getChildren().addAll(OK,back,filechooser);
 		

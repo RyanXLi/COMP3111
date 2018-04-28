@@ -22,43 +22,32 @@ public class LoadCSV {
 		int RowNum = 0;
 		int ColNum = 0;
 		
-		try {
-			FileReader fr = new FileReader(fileName);
-		} catch(Exception e) {
-			return result;
-		}
-		
 		// Find the size of the table
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(fileName));
-			String line = null;
+		BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		String line = null;
 			
-			while ((line = reader.readLine()) != null) {
-				String[] item = line.split(",");
-				if (item.length > RowNum) {
-					RowNum = item.length;
-				}
-				
-				ColNum = ColNum + 1;
+		while ((line = reader.readLine()) != null) {
+			String[] item = line.split(",",-1);
+			if (item.length > RowNum) {
+				RowNum = item.length;
 			}
-			reader.close();
-		} catch (Exception e) {
-				System.out.println("Given fileName cannot be processed");
-				return result;
+				
+			ColNum = ColNum + 1;
 		}
-		
-		
+		reader.close();
+
 		// Load the data
 		ArrayList<ArrayList<String>> csvList = new ArrayList<>();
 		
 		BufferedReader reader2 = new BufferedReader(new FileReader(fileName));
-		String line2 = null;
+		String line2 = new String();
 		
 		// Read the name row
 		ArrayList<String> nameMap = new ArrayList<>();
 		line2 = reader2.readLine();
 		ColNum = ColNum -1;
-		String[] nameRead = line2.split(",");
+		String[] nameRead = line2.split(",",-1);
+		
 		for (int i = 0; i < nameRead.length; i++) {
 			nameMap.add(nameRead[i]);
 		}
@@ -69,14 +58,16 @@ public class LoadCSV {
 		
 		
 		while ((line2 = reader2.readLine()) != null) {
-				String[] items = line2.split(",");
-				ArrayList<String> temp = null;
+				String[] items = line2.split(",",-1);
+				ArrayList<String> temp = new ArrayList<>();
+				
 				for (int i = 0; i < items.length; i++) {
 					temp.add(items[i]);
 				}
+				
 				csvList.add(temp);
 		}
-		
+		reader2.close();
 		
 		// Decide the filling staff
 		// There are two situations when we need fill: Row < RowNum and ,, for Num
@@ -91,27 +82,28 @@ public class LoadCSV {
 		
 		for (int i = 0; i < RowNum; i++) {
 			allComma = true;
+			indicator = "Number";
 			
 			for (int j = 0; j < csvList.size(); j++) {
 				
-				if (csvList.get(j).size() < i) {
+				if (csvList.get(j).size() <= i) {
 					continue;
 				}
 				
-				if (csvList.get(j).get(i) == "") {
+				if (csvList.get(j).get(i).isEmpty()) {
 					continue;
-				} // so we define all comma case as Number
-								
+				} // so we define all comma case as String
+				else{
+					allComma = false;
+				}
+				
 				if (isNumber(csvList.get(j).get(i)) == false) {
 					indicator = "String";
-					if (allComma) {
-						allComma = false;
-					}
 					// if one in the col is not string, it is string type
 				}
 			}
 			
-			if (!allComma) {
+			if (allComma == false) {
 				typeMap.add(indicator);
 			} else {
 				typeMap.add("String");
@@ -135,7 +127,7 @@ public class LoadCSV {
 				ArrayList<Double> temp = new ArrayList<>();
 				// get the numbers
 				for (int j = 0; j < csvList.size(); j++) {
-					if(csvList.get(j).get(i) != "") {
+					if(!csvList.get(j).get(i).isEmpty()) {
 						temp.add(Double.parseDouble(csvList.get(j).get(i)));
 					}
 				}
@@ -149,24 +141,23 @@ public class LoadCSV {
 					numfill = sum/ temp.size();
 				}
 				
-				// Handle Media
+				// Handle Median
 				if (handleType == "Median") {
 					// Sorting 
 					Collections.sort(temp);
-					
+				
 					int index;
 					if (temp.size()%2 == 1) {
 						index = temp.size()/2;
-						index++;
 						numfill = temp.get(index);
 					} else {
 						index = temp.size()/2;
-						numfill = (temp.get(index) + temp.get(index+1))/2;
+						numfill = (temp.get(index) + temp.get(index-1))/2;
 					}
 				}
 				
 				for (int j = 0; j < csvList.size(); j++) {
-					if(csvList.get(j).get(i) == "") {
+					if(csvList.get(j).get(i).isEmpty()) {
 						ArrayList<String> filltemp = csvList.get(j);
 						filltemp.set(i, Double.toString(numfill));
 						csvList.set(j, filltemp);
@@ -226,4 +217,10 @@ public class LoadCSV {
 		
 		return true;
 	}
+	
+	// A constructor for test coverage
+		public LoadCSV(){
+				init = "Success";
+		}
+		public String init;
 }
