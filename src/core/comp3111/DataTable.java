@@ -134,13 +134,25 @@ public class DataTable {
 		return dc;
 	}
 	
+
 	
-	//**********************************************************************//
-	//Following is the filtering and transformation algorithm implementation.
-	//In these algorithms the dataTye of the target DataColumn is checked
-	//before doing transformations
+	/**
+	 * Do the numeric filtering according to the operator and number provided by user. 
+	 * @param colName
+	 *         - The column name, which column is based on when filtering.
+	 * @param operator
+	 *         - The operator, could be >, <, >=, <=, == 
+	 * @param num
+	 *         - The number provided by user
+	 * @return the new DataTable after filtering
+	 * 
+	 * @throws DataTableException
+	 *         It throws DataTableException if the column cannot be added to the new DataTable
+	 *         
+	 */
 	
-	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException, NumberFormatException {
+	
+	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException{
 
 		DataTable result = new DataTable();
         
@@ -218,6 +230,20 @@ public class DataTable {
 		return result;
 	}
 	
+	
+	/**
+	 * Do the textual filtering according to the operator and number provided by user. 
+	 * @param colName
+	 *         - The column name, which column is based on when filtering.
+	 * @param label
+	 *         - The text provided by user to do filtering
+	 *         
+	 * @return the new DataTable after filtering
+	 * 
+	 * @throws DataTableException
+	 *         It throws DataTableException if the column cannot be added to the new DataTable
+
+	 */
 	
 	
 	// This algorithm filter the datacolumn by text label
