@@ -1,9 +1,11 @@
 package core.comp3111;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 //
+<<<<<<< HEAD
    /**
     * A collection of two maps, one to store all the DataTables 
     * and one to stor all the Charts
@@ -16,6 +18,11 @@ public class DataCollection {
 	/**
 	 * Construct - create an empty DataCollection
 	 */
+=======
+public class DataCollection implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+>>>>>>> refs/remotes/origin/master
 	
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
@@ -24,6 +31,7 @@ public class DataCollection {
 		chartNum=1;
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Check whether the DataTable exists by the given name
 	 * @param tableName
@@ -31,11 +39,20 @@ public class DataCollection {
 	 * @return True if it contains the dataTable, false otherwise
 	 * 
 	 */
+=======
+	DataCollection(DataCollection dc){
+		tableCollection = dc.tableCollection;
+		chartCollection = dc.chartCollection;
+		tableNum = dc.tableNum;
+		chartNum = dc.chartNum;
+	}
+>>>>>>> refs/remotes/origin/master
 	
 	public boolean containsTable(String tableName) {
 		return tableCollection.containsKey(tableName);
 	}
 	
+<<<<<<< HEAD
 	
 	/**
 	 * Check whether the Chart exists by the given name
@@ -45,6 +62,8 @@ public class DataCollection {
 	 * 
 	 */
 	
+=======
+>>>>>>> refs/remotes/origin/master
 	public boolean containsChart(String chartName) {
 		return chartCollection.containsKey(chartName);
 	}

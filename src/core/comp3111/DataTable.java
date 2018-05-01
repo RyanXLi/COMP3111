@@ -4,6 +4,7 @@ package core.comp3111;
 import java.util.HashMap;
 
 import java.util.Map;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * 2D array of data values with the following requirements: (1) There are 0 to
@@ -15,8 +16,8 @@ import java.util.ArrayList;
  * @author cspeter
  *
  */
-public class DataTable {
-
+public class DataTable implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct - Create an empty DataTable
@@ -28,6 +29,7 @@ public class DataTable {
 		dc = new HashMap<String, DataColumn>();
 	}
 
+	
 	/**
 	 * Add a data column to the table.
 	 * 
@@ -128,13 +130,22 @@ public class DataTable {
 		return dc.get(entry.getKey()).getSize();
 	}
 	
-	
-	
 	public Map<String, DataColumn> getDataTable(){
 		return dc;
 	}
 	
+<<<<<<< HEAD
 
+=======
+	public ArrayList<DataColumn> getDataTableCols(){
+		ArrayList<DataColumn> dtCols = new ArrayList<>();
+		for (DataColumn entry: dc.values()) {
+			dtCols.add(entry);
+		}
+		return dtCols;
+	}
+	
+>>>>>>> refs/remotes/origin/master
 	
 	/**
 	 * Do the numeric filtering according to the operator and number provided by user. 
@@ -295,6 +306,14 @@ public class DataTable {
 	// KeyType: String
 	// ValueType: DataColumn
 	private Map<String, DataColumn> dc;
+
+
+
+
+
+
+
+
 
 }
 
