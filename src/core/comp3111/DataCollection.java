@@ -5,25 +5,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 //
-<<<<<<< HEAD
-   /**
-    * A collection of two maps, one to store all the DataTables 
-    * and one to stor all the Charts
-    * 
-    * 
-    * @author qchen
-    *
-    */
-public class DataCollection {
-	/**
-	 * Construct - create an empty DataCollection
-	 */
-=======
+
+
+/**
+ * A collection of two maps, one to store all the DataTables 
+ * and one to store all the Charts
+ * 
+ * 
+ * @author qchenax
+ *
+ */
 public class DataCollection implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
->>>>>>> refs/remotes/origin/master
 	
+	
+	/**
+	 * Construct - Create an empty DataCollection
+	 */
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
 		chartCollection = new LinkedHashMap<String, DataChart>();
@@ -31,28 +30,25 @@ public class DataCollection implements Serializable{
 		chartNum=1;
 	}
 	
-<<<<<<< HEAD
-	/**
-	 * Check whether the DataTable exists by the given name
-	 * @param tableName
-	 *            - the name of the target DataTable
-	 * @return True if it contains the dataTable, false otherwise
-	 * 
-	 */
-=======
+	
 	DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
 		chartCollection = dc.chartCollection;
 		tableNum = dc.tableNum;
 		chartNum = dc.chartNum;
 	}
->>>>>>> refs/remotes/origin/master
 	
+	/**
+	 * Check whether the DataTable exists by the given name
+	 * @param tableName
+	 *            - the name of the target DataTable
+	 * @return True if it contains the dataTable, false otherwise
+	 * 
+	 */	
 	public boolean containsTable(String tableName) {
 		return tableCollection.containsKey(tableName);
 	}
 	
-<<<<<<< HEAD
 	
 	/**
 	 * Check whether the Chart exists by the given name
@@ -62,20 +58,20 @@ public class DataCollection implements Serializable{
 	 * 
 	 */
 	
-=======
->>>>>>> refs/remotes/origin/master
 	public boolean containsChart(String chartName) {
 		return chartCollection.containsKey(chartName);
 	}
 	
+	
+	
+	
 	/**
-	 * Add a dataTable to the collection.
+	 * Add a DataTable to the collection.
 	 * 
 	 * @param dt
 	 *        - the DataTable, it will be given a name automatically
-	 *
+	 * 
 	 */
-	
 	public void addDataTable(DataTable dt) {
 		String name = "DataTable" + tableNum.toString();
 		tableCollection.put(name, dt);
@@ -170,6 +166,7 @@ public class DataCollection implements Serializable{
 		return;
 	}
 	
+	
 	/**
 	 * Remove a Chart named chartName from the Collection
 	 * Do nothing if such Chart doesn't exist
@@ -249,6 +246,6 @@ public class DataCollection implements Serializable{
 	
 	private Map<String, DataTable> tableCollection;
 	private Map<String, DataChart> chartCollection;
-    private Integer tableNum = 1;
-    private Integer chartNum = 1;
+    private Integer tableNum;
+    private Integer chartNum;
 }

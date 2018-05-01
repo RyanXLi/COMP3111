@@ -130,13 +130,19 @@ public class DataTable implements Serializable{
 		return dc.get(entry.getKey()).getSize();
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return the map containing all the DataColumns
+	 */
 	public Map<String, DataColumn> getDataTable(){
 		return dc;
 	}
 	
-<<<<<<< HEAD
+	
+	
 
-=======
 	public ArrayList<DataColumn> getDataTableCols(){
 		ArrayList<DataColumn> dtCols = new ArrayList<>();
 		for (DataColumn entry: dc.values()) {
@@ -145,7 +151,15 @@ public class DataTable implements Serializable{
 		return dtCols;
 	}
 	
->>>>>>> refs/remotes/origin/master
+
+	
+	
+	//**********************************************************************//
+	//Following is the filtering and transformation algorithm implementation.
+	//In these algorithms the dataTye of the target DataColumn is checked
+	//before doing transformations
+	
+	
 	
 	/**
 	 * Do the numeric filtering according to the operator and number provided by user. 
@@ -161,9 +175,7 @@ public class DataTable implements Serializable{
 	 *         It throws DataTableException if the column cannot be added to the new DataTable
 	 *         
 	 */
-	
-	
-	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException{
+	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException, NumberFormatException {
 
 		DataTable result = new DataTable();
         
@@ -242,6 +254,7 @@ public class DataTable implements Serializable{
 	}
 	
 	
+	
 	/**
 	 * Do the textual filtering according to the operator and number provided by user. 
 	 * @param colName
@@ -253,11 +266,7 @@ public class DataTable implements Serializable{
 	 * 
 	 * @throws DataTableException
 	 *         It throws DataTableException if the column cannot be added to the new DataTable
-
 	 */
-	
-	
-	// This algorithm filter the datacolumn by text label
 	public DataTable filterByLabel(String colName, String label) throws DataTableException {
 		
 		DataTable result = new DataTable();
