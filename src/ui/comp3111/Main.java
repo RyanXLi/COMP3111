@@ -3,9 +3,12 @@ package ui.comp3111;
 import core.comp3111.DataCollection;
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
+import core.comp3111.DataTableException;
 import core.comp3111.DataType;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -29,26 +32,69 @@ public class Main extends Application {
  
 	
     static DataCollection dtcl= new DataCollection();
-    public static LineDataChart aniCache;
+    public static LineDataChart aniCache = null;
     private static ListView<String> dataTableList = new ListView<String>();
 	private static ListView<String> chartList = new ListView<String>();
 
 	private boolean isDebugging = true;
+	
+	public static void animate(Stage primaryStage, LineDataChart orig) {
+		//while (orig.isAnimated) {
+			System.out.println("one animation");
+			// calculate new bounds
+			double xRangeLen = (orig.origUpperBound - orig.origLowerBound) / orig.fps / orig.timeOfOnePlay;
+			double upperBound, lowerBound;
+			if (Main.aniCache == null || (Main.aniCache.curUpperBound + xRangeLen >= Main.aniCache.origUpperBound)) {
+				// TODO: change "==null"
+				// first frame of animation OR next frame over bound
+				lowerBound = orig.origLowerBound;
+				upperBound = orig.shownRatio * orig.origUpperBound;
+			} else {
+				lowerBound = Main.aniCache.curLowerBound + xRangeLen;
+				upperBound = Main.aniCache.curUpperBound + xRangeLen;
+			}
+			
+			//System.out.println(lowerBound);
+			//System.out.println(upperBound);
+			//System.out.println();
+			
+			
+			try {
+				Main.aniCache = new LineDataChart(orig.dataTable, orig.xColName, orig.yColName, orig.chartTitle, false,
+						true, lowerBound, upperBound);
+			} catch (DataTableException e1) {
+				e1.printStackTrace();
+			}
+			
+			Main.aniCache.curLowerBound = lowerBound;
+			Main.aniCache.curUpperBound = upperBound;	
+
+			primaryStage.setScene(new Scene(Main.aniCache.getLineChart()));
+			
+			//try {
+			//	Thread.sleep((long)(2000));
+			//} catch (InterruptedException e) {
+			//	e.printStackTrace();
+			//}
+		//}
+
+
+	}
 
 		  @Override
 	public void start(Stage primaryStage) {
 			 
         DataTable dt1 = new DataTable();
         if (isDebugging) {
-	    	DataColumn testDataColumn   = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2, 3, 4, 5});
-	    	DataColumn testDoubleColumn = new DataColumn(DataType.TYPE_NUMBER, new Double[] {3.3, 2.2, 1.1, 5.5, 4.4});
-	    	DataColumn testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"a","b","a", "a", "b"});
-	    	DataColumn testCommaColumn  = new DataColumn(DataType.TYPE_STRING, new String[] {"a","a","a","a", "a"});
+	    	DataColumn testDataColumn   = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2, 3, 4, 5,6,7});
+	    	DataColumn testDoubleColumn = new DataColumn(DataType.TYPE_NUMBER, new Double[] {3.3, 2.2, 1.1, 5.5, 4.4,7.7,6.6});
+	    	DataColumn testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"a","b","a", "a", "b","b","a"});
+	    	//DataColumn testCommaColumn  = new DataColumn(DataType.TYPE_STRING, new String[] {"a","a","a","a", "a"});
 	    	try {
 		    	dt1.addCol("testDataColumn", testDataColumn  );
 		    	dt1.addCol("testDoubleColumn", testDoubleColumn);
 		    	dt1.addCol("testStringColumn", testStringColumn);
-		    	dt1.addCol("testCommaColumn", testCommaColumn );
+		    	//dt1.addCol("testCommaColumn", testCommaColumn );
 	    	} catch (Exception e) {
 			}
         }

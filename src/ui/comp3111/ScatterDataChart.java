@@ -107,18 +107,20 @@ public class ScatterDataChart extends DataChart {
 
 		BorderPane pane = new BorderPane();
 		pane.setCenter(container);
-        Scene scatterChartScene = new Scene(pane, 230, 100);
+        Scene scatterChartScene = new Scene(pane, 600, 600);
+        
+        primaryStage.setScene(scatterChartScene);
 
-        // New window (Stage)
-        Stage scatterChartWindow = new Stage();
-        scatterChartWindow.setTitle("Second Stage");
-        scatterChartWindow.setScene(scatterChartScene);
-
-        // Set position of second window, related to primary window.
-        scatterChartWindow.setX(primaryStage.getX() + 200);
-        scatterChartWindow.setY(primaryStage.getY() + 100);
-
-        scatterChartWindow.show();
+        //// New window (Stage)
+        //Stage scatterChartWindow = new Stage();
+        //scatterChartWindow.setTitle("Second Stage");
+        //scatterChartWindow.setScene(scatterChartScene);
+        //
+        //// Set position of second window, related to primary window.
+        //scatterChartWindow.setX(primaryStage.getX() + 200);
+        //scatterChartWindow.setY(primaryStage.getY() + 100);
+        //
+        //scatterChartWindow.show();
         
 	}
 

@@ -154,7 +154,10 @@ public class DrawConfigurationScene {
 							xColBox.getSelectionModel().getSelectedItem(), 
 							yColBox.getSelectionModel().getSelectedItem(),
 							tableTitle.getText(),
-							false);
+							false,
+							false,
+							0,
+							2);
 				} else if (chartType.equals(TYPE_SCATTER)) {
 					result = new ScatterDataChart(Main.dtcl.getDataTable(dtName), 
 							xColBox.getSelectionModel().getSelectedItem(), 
@@ -168,7 +171,10 @@ public class DrawConfigurationScene {
 							xColBox.getSelectionModel().getSelectedItem(), 
 							yColBox.getSelectionModel().getSelectedItem(),
 							tableTitle.getText(),
-							true);
+							true,
+							false,
+							0,
+							0);
 				}
 				Main.dtcl.addDataChart(result);			
 			
