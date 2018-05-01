@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import core.comp3111.DataCollection;
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
-import core.comp3111.DataChart;
 import core.comp3111.DataColumn;
 import core.comp3111.DataType;
+import ui.comp3111.DataChart;
 
 public class DataCollectionTest {
 	DataCollection dc;
