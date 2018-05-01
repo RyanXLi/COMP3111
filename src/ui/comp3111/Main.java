@@ -65,8 +65,11 @@ public class Main extends Application {
     private static ListView<String> dataTableList = new ListView<String>();
 	private static ListView<String> chartList = new ListView<String>();
 
-
-		  @Override
+ 
+	/**
+	 * The start page, the mainpage of the application
+	 */
+	@Override
 	public void start(Stage primaryStage) {
 			 
         DataTable dt1 = new DataTable();
@@ -79,7 +82,10 @@ public class Main extends Application {
         primaryStage.show();    
     }
   
-  
+    /**
+     * Program starts here
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
 	    }

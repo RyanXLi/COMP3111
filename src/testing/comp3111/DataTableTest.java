@@ -13,11 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the DataTable class.
+ * A sample DataTable test case written using JUnit. It achieves 100% test
+ * coverage on the DataTable class
  * 
- * You'll be writing tests here for the Unit Testing lab!
- * 
- * @author victorkwan
+ * @author qchenax
  *
  */
 public class DataTableTest {

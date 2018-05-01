@@ -51,8 +51,21 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
-
+/**
+ * The numeric filter page
+ * @author qchenax
+ *
+ */
 public class NumericFilterScene {
+	/**
+	 * Draw the numeric filter page
+	 * @param primaryStage
+	 *        - The Stage of the application, used to return to the main page
+	 * @param dtName
+	 *        - The DataTable selected to do filtering
+	 * @return The numeric filter scene
+	 *    
+	 */
 	public static Scene numericFilter(Stage primaryStage, String dtName) {
 		
 		DataTable dt = Main.dtcl.getDataTable(dtName); 

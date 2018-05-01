@@ -16,9 +16,22 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * The text filter page
+ * @author qchenax
+ *
+ */
 public class TextFilterScene {
-public static Scene textFilter(Stage primaryStage, String dtName) {
+	/**
+	 * Draw the text filter page
+	 * @param primaryStage
+	 *        - The Stage of the application, used to return to the main page
+	 * @param dtName
+	 *        - The DataTable selected to do filtering
+	 * @return The text filter scene
+	 *    
+	 */
+    public static Scene textFilter(Stage primaryStage, String dtName) {
 			
 	    DataTable dt = Main.dtcl.getDataTable(dtName); 
 	
