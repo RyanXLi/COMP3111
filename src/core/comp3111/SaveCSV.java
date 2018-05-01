@@ -17,8 +17,8 @@ import java.util.*;
 public class SaveCSV {
 	
 	/**
-	 * Save a dataTable to .csv.
-	 * 
+	 * Save a dataTable to .csv with the filename you want
+	 * @author xzhaoar
 	 * @param filename
 	 *            - the name you want, or the file you want to replace
 	 * @param source

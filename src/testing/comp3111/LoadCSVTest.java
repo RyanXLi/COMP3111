@@ -22,7 +22,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-/* A SaveCSV file test
+/** 
+ * A SaveCSV file test
  * 
  * @author xzhaoar
  *
@@ -34,7 +35,12 @@ class LoadCSVTest {
 	DataColumn testCommaColumn;
 	
 	DataTable dataTable;
-    
+	/** 
+	 * Initialize the test data needed.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 	@BeforeEach
     void init() {
     	testDataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2});
@@ -43,12 +49,23 @@ class LoadCSVTest {
     	testCommaColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"","",""});
     	dataTable= new DataTable();
     }
+	/** 
+	 * Test for satisfying the 100 coverage.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
     @Test
     void testConstructor() {
     	LoadCSV x = new LoadCSV();
     	assert(x.init == "Success");
     }
-    
+    /** 
+	 * Test if it can load strings correctly.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 	@Test
 	void containsStringTest() throws DataTableException, IOException {
 		//dataTable.addCol("testDataColumn", testDataColumn);
@@ -59,7 +76,13 @@ class LoadCSVTest {
 		
 		assert(test.containsColumn("a"));
 	}
-	
+	 
+	/** 
+	 * Test if it can load numbers correctly.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */	
 	@Test
 	void containsNumberTest() throws DataTableException, IOException {
 		dataTable.addCol("testDataColumn", testDataColumn);
@@ -70,7 +93,12 @@ class LoadCSVTest {
 		
 		assert(test.containsColumn("1"));
 	}
-	
+	/** 
+	 * Test the duplicate name handle, if it is working as the naming rule.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */	
 	@Test
 	void containsDoubleTest() throws DataTableException, IOException {
 		dataTable.addCol("testDoubleColumn", testDoubleColumn);
@@ -81,7 +109,12 @@ class LoadCSVTest {
 		
 		assert(test.containsColumn("1.1"));
 	}
-	
+	/** 
+	 * Test the case when missing data handling type is mean
+	 * 
+	 * @author xzhaoar
+	 *
+	 */		
 	@Test
 	void meanTest() throws DataTableException, IOException {
 		dataTable.addCol("testDoubleColumn", testDoubleColumn);
@@ -92,7 +125,12 @@ class LoadCSVTest {
 		
 		assert(test.containsColumn("1.1"));
 	}
-	
+	/** 
+	 * Test the case when missing data handling type is median
+	 * 
+	 * @author xzhaoar
+	 *
+	 */		
 	@Test
 	void medianTest() throws DataTableException, IOException {
 		dataTable.addCol("testDoubleColumn", testDoubleColumn);
@@ -103,7 +141,12 @@ class LoadCSVTest {
 		
 		assert(test.containsColumn("1.1"));
 	}
-	
+	/** 
+	 * Test the duplicated case for double.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */	
 	@Test
 	void containsDupTest() throws DataTableException, IOException {
 		dataTable.addCol("testDoubleColumn", testDoubleColumn);
@@ -115,7 +158,12 @@ class LoadCSVTest {
 	
 		assert(test.containsColumn("1.1 @1"));
 	}
-	
+	/** 
+	 * Test the duplicated case for string.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */		
 	@Test
 	void containsDupTest2() throws DataTableException, IOException {
 		dataTable.addCol("testStringColumn", testStringColumn);
@@ -127,7 +175,12 @@ class LoadCSVTest {
 	
 		assert(test.containsColumn("a"));
 	}
-	
+	/** 
+	 * Test the case when all the input are comma
+	 * 
+	 * @author xzhaoar
+	 *
+	 */		
 	@Test
 	void allCommaTest() throws DataTableException, IOException {
 		dataTable.addCol("testCommaColumn", testCommaColumn);
@@ -137,7 +190,12 @@ class LoadCSVTest {
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default");
 		assert(test.containsColumn(""));
 	}
-	
+	/** 
+	 * Test the general case when we need to handle the missing data
+	 * 
+	 * @author xzhaoar
+	 *
+	 */		
 	@Test
 	void fillTest() throws IOException, DataTableException {
 		
