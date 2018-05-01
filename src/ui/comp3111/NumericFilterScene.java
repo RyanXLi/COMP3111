@@ -2,6 +2,7 @@ package ui.comp3111;
 
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
+import core.comp3111.DataType;
 
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -60,7 +61,7 @@ public class NumericFilterScene {
 		ArrayList<String> numColName= new ArrayList<>();		
 		if(dt.getNumCol()>0) {
 		    for(String colName:dt.getDataTable().keySet()) {
-			    if(dt.getCol(colName).getTypeName()=="java.lang.Number")
+			    if(dt.getCol(colName).getTypeName().equals(DataType.TYPE_NUMBER))
 				    numColName.add(colName);
 		    }
 		}

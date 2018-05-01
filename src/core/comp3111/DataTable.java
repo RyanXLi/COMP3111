@@ -169,34 +169,34 @@ public class DataTable {
 		
 		
 		
-		if(operator==">") {
+		if(operator.equals(">")) {
 		    for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())>num) {
 				    keep.add(i);
 			    }
 		    }
 		}		
-		else if(operator=="<") {
+		else if(operator.equals("<")) {
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())<num) {
 				    keep.add(i);
 			    }
 		    }
 		}
-		else if(operator==">=") {
+		else if(operator.equals(">=")) {
 		    for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())>=num) {
 				    keep.add(i);
 			    }
 		    }
 		}		
-		else if(operator=="<=")
+		else if(operator.equals("<="))
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())<=num) {
 				    keep.add(i);
 			    }
 		    }		    
-		else if(operator=="=="){
+		else if(operator.equals("==")){
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())==num) {
 				    keep.add(i);
