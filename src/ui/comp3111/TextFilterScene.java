@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
+import core.comp3111.DataType;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ public static Scene textFilter(Stage primaryStage, String dtName) {
 		ArrayList<String> textColName= new ArrayList<>();		
 		if(dt.getNumCol()>0) {
 		    for(String colName:dt.getDataTable().keySet()) {
-			    if(dt.getCol(colName).getTypeName()=="java.lang.String")
+			    if(dt.getCol(colName).getTypeName().equals(DataType.TYPE_STRING))
 				    textColName.add(colName);
 		    }
 		}
