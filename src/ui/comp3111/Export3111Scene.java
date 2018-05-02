@@ -61,7 +61,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+	/**
+	 * 
+	 * @author xzhaoar
+	 *
+	 */	
 public class Export3111Scene {
 	/**
 	 * Scene for export 3111 button
@@ -70,6 +74,7 @@ public class Export3111Scene {
 	 *            - original main stage
 	 * @param dtName
 	 *            - the DataTable you want to save
+	 * @return export3111Scene
 	 */
 	
 	public static Scene export3111(Stage primaryStage, String dtName) {
