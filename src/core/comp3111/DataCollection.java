@@ -1,6 +1,7 @@
 package core.comp3111;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -28,19 +29,20 @@ public class DataCollection implements Serializable{
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
 		chartCollection = new LinkedHashMap<String, DataChart>();
+		chartParams = new ArrayList<ArrayList<String>>();
 		tableNum=1;
 		chartNum=1;
 	}
-
+	
 	/**
 	 * Construct - copy from a DataCollection
 	 * @param dc
 	 *     - The DataCollection copying from
 	 */
-
 	public DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
 		chartCollection = dc.chartCollection;
+		chartParams = dc.chartParams;
 		tableNum = dc.tableNum;
 		chartNum = dc.chartNum;
 	}
@@ -253,6 +255,7 @@ public class DataCollection implements Serializable{
 	
 	private Map<String, DataTable> tableCollection;
 	public transient Map<String, DataChart> chartCollection;
+	public ArrayList<ArrayList<String>> chartParams;
     private Integer tableNum;
     private Integer chartNum;
 }

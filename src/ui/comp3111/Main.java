@@ -1,5 +1,9 @@
 package ui.comp3111;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import core.comp3111.DataCollection;
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
@@ -47,6 +51,58 @@ public class Main extends Application {
 	private static boolean isDebugging = true;
 	public static boolean isAnimated = false;
 
+	public static Map<String, DataChart> reconstruct(ArrayList<ArrayList<String>> chartParams) {
+		Map<String, DataChart> ret = new LinkedHashMap<String, DataChart>();
+		for (int i = 0; i < chartParams.size(); i++) {
+			if (chartParams.get(i).get(0).equals(DrawConfigurationScene.TYPE_LINE)) {
+				try {
+					ret.put("DataChart"+((Integer)(i+1)).toString(), 
+							new LineDataChart(
+									Main.dtcl.getDataTable(chartParams.get(i).get(1)),
+									chartParams.get(i).get(2),
+									chartParams.get(i).get(3),
+									chartParams.get(i).get(4),
+									false,
+									false,
+									0,
+									2));
+				} catch (Exception e) {
+				}
+				
+			} else if (chartParams.get(i).get(0).equals(DrawConfigurationScene.TYPE_SCATTER)) {
+				try {
+					ret.put("DataChart"+((Integer)(i+1)).toString(), 
+							new ScatterDataChart(
+									Main.dtcl.getDataTable(chartParams.get(i).get(1)),
+									chartParams.get(i).get(2),
+									chartParams.get(i).get(3),
+									chartParams.get(i).get(4),
+									chartParams.get(i).get(5)
+									));
+				} catch (Exception e) {
+				}
+				
+			} else {
+				// TYPE_ANI_LINE
+				try {
+					ret.put("DataChart"+((Integer)(i+1)).toString(), 
+							new LineDataChart(
+									Main.dtcl.getDataTable(chartParams.get(i).get(1)),
+									chartParams.get(i).get(2),
+									chartParams.get(i).get(3),
+									chartParams.get(i).get(4),
+									true,
+									false,
+									0,
+									2));
+				} catch (Exception e) {
+				}
+			}
+		}
+		return ret;
+	}
+	
+	
 	
 	/**
 	 * The method of drawing a frame of the animation

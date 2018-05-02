@@ -8,6 +8,8 @@ import core.comp3111.SaveCSV;
 import core.comp3111.DataCollection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -150,6 +152,17 @@ public class DrawConfigurationScene {
 			DataChart result;
 			try {
 				if (chartType.equals(TYPE_LINE)) {
+					Main.dtcl.chartParams.add(
+							new ArrayList<String>(
+									Arrays.asList(
+										TYPE_LINE,
+										dtName, 
+										xColBox.getSelectionModel().getSelectedItem(), 
+										yColBox.getSelectionModel().getSelectedItem(),
+										tableTitle.getText(),
+										"")
+									)
+							);
 					result = new LineDataChart(Main.dtcl.getDataTable(dtName), 
 							xColBox.getSelectionModel().getSelectedItem(), 
 							yColBox.getSelectionModel().getSelectedItem(),
@@ -158,15 +171,40 @@ public class DrawConfigurationScene {
 							false,
 							0,
 							2);
+					
 				} else if (chartType.equals(TYPE_SCATTER)) {
+					Main.dtcl.chartParams.add(
+							new ArrayList<String>(
+									Arrays.asList(
+										TYPE_SCATTER,
+										dtName,
+										xColBox.getSelectionModel().getSelectedItem(), 
+										yColBox.getSelectionModel().getSelectedItem(),
+										cateBox.getSelectionModel().getSelectedItem(),
+										tableTitle.getText()
+										)
+									)
+							);
 					result = new ScatterDataChart(Main.dtcl.getDataTable(dtName), 
 							xColBox.getSelectionModel().getSelectedItem(), 
 							yColBox.getSelectionModel().getSelectedItem(),
 							cateBox.getSelectionModel().getSelectedItem(),
 							tableTitle.getText()
 							);
+					
 				} else {
 					// (chartType.equals(TYPE_ANI_LINE)) {
+					Main.dtcl.chartParams.add(
+							new ArrayList<String>(
+									Arrays.asList(
+										TYPE_ANI_LINE,
+										dtName,
+										xColBox.getSelectionModel().getSelectedItem(), 
+										yColBox.getSelectionModel().getSelectedItem(),
+										tableTitle.getText(),
+										"TRUE")
+									)
+							);
 					result = new LineDataChart(Main.dtcl.getDataTable(dtName), 
 							xColBox.getSelectionModel().getSelectedItem(), 
 							yColBox.getSelectionModel().getSelectedItem(),
@@ -181,7 +219,7 @@ public class DrawConfigurationScene {
 			} catch (DataTableException e1) {
 				Alert alert = new Alert(AlertType.WARNING,"Input cannot be processed");
 				alert.showAndWait();
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			}
 				
 			Alert alert = new Alert(AlertType.WARNING,"Successfully created chart!");
