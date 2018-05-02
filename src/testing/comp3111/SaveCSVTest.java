@@ -20,7 +20,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-/* A SaveCSV file test
+/** A SaveCSV file test
  * 
  * @author xzhaoar
  *
@@ -29,19 +29,35 @@ class SaveCSVTest {
 	DataColumn testDataColumn;
 	DataTable dataTable;
 	DataColumn testStringColumn;
-    
+	/** 
+	 * Initialize the test data needed.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 	@BeforeEach
     void init() {
     	testDataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2,3});
     	testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"1","2","3"});
     	dataTable= new DataTable();
     }
+	/** 
+	 * Test for satisfying the 100 coverage.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
     @Test
     void testConstructor() {
     	SaveCSV x = new SaveCSV();
     	assert(x.init == "Success");
     }
-    
+	/** 
+	 * Test for saving the data by read the file with primitive way.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 	@Test
 	void writeFileTest() throws DataTableException, IOException {
 		dataTable.addCol("testDataColumn", testDataColumn);

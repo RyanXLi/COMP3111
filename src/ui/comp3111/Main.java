@@ -35,7 +35,6 @@ public class Main extends Application {
     public static LineDataChart aniCache = null;
     private static ListView<String> dataTableList = new ListView<String>();
 	private static ListView<String> chartList = new ListView<String>();
-
 	private boolean isDebugging = true;
 	
 	public static void animate(Stage primaryStage, LineDataChart orig) {
@@ -81,7 +80,11 @@ public class Main extends Application {
 
 	}
 
-		  @Override
+ 
+	/**
+	 * The start page, the mainpage of the application
+	 */
+	@Override
 	public void start(Stage primaryStage) {
 			 
         DataTable dt1 = new DataTable();
@@ -106,7 +109,10 @@ public class Main extends Application {
         primaryStage.show();    
     }
   
-  
+    /**
+     * Program starts here
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
 	    }
@@ -164,10 +170,10 @@ public class Main extends Application {
 		
 		//The file menu
 		Menu fileMenu = new Menu("File");
-		MenuItem importMenuItem = new MenuItem("import from CSV");
-		MenuItem exportMenuItem = new MenuItem("export as CSV");
-		MenuItem saveMenuItem = new MenuItem("save as 3111");
-		MenuItem loadMenuItem = new MenuItem("import from 3111");
+		MenuItem importMenuItem = new MenuItem("import DataTable from .csv");
+		MenuItem exportMenuItem = new MenuItem("export DataTable as .csv");
+		MenuItem saveMenuItem = new MenuItem("save Everything as .comp3111");
+		MenuItem loadMenuItem = new MenuItem("import from .comp3111");
 		
 		fileMenu.getItems().addAll(importMenuItem,exportMenuItem, loadMenuItem,saveMenuItem
 		     );

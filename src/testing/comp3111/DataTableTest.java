@@ -13,11 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the DataTable class.
+ * A sample DataTable test case written using JUnit. It achieves 100% test
+ * coverage on the DataTable class
  * 
- * You'll be writing tests here for the Unit Testing lab!
- * 
- * @author victorkwan
+ * @author qchenax
  *
  */
 public class DataTableTest {
@@ -58,7 +57,7 @@ public class DataTableTest {
 	
 	@Test
 	void testGetCol_NonExistent() throws DataTableException {
-		DataTable dataTable = new DataTable();
+\		DataTable dataTable = new DataTable();
 		dataTable.addCol("testNumberColumn", testDataColumn);
 		
 		DataColumn dataColumn = dataTable.getCol("testStringColumn");
@@ -88,12 +87,19 @@ public class DataTableTest {
 	}
 	
 	@Test
+
 	void testRemoveCol_NotExist() throws DataTableException {
 		DataTable dataTable = new DataTable();
 		dataTable.addCol("testNumberColumn", testDataColumn);
 		assertThrows(DataTableException.class, ()->dataTable.removeCol("jibberish"));
+
+	void testFilterByOperator_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testDataColumn", testDataColumn);
+		DataTable afterFilter=dataTable.filterByOperator("testDataColumn", "<", 0);
+		assert(afterFilter.getNumRow()==0);
+
 	}
-	
+		
 	@Test
 	void testRemoveCol_Exists() throws DataTableException {
 		DataTable dataTable = new DataTable();
@@ -102,5 +108,32 @@ public class DataTableTest {
 		assertEquals(0, dataTable.getNumCol());
 	}
 	
+	@Test
+	void testFilterByLabel_Empty()throws DataTableException{
+		dataTable.addCol("testStringColumn", new DataColumn());
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
+		assert(afterFilter.getNumRow()==dataTable.getNumRow());
+	}
+	
+
+	@Test
+	void testFilterByLabel()throws DataTableException{
+		dataTable.addCol("testStringColumn", testStringColumn);
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
+		assert(afterFilter.getNumRow()==1);
+	}
+	
+	@Test
+	void testFilterByLabel_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testStringColumn", testStringColumn);
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "0");
+		assert(afterFilter.getNumRow()==0);
+	}
+	@Test
+	void testGetDataTable()throws DataTableException{
+		dataTable.addCol("testStringColumn", testStringColumn);
+		assert(dataTable.getDataTable().keySet().contains("testStringColumn"));
+
+	}
 
 }

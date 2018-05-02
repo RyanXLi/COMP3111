@@ -130,10 +130,19 @@ public class DataTable implements Serializable{
 		return dc.get(entry.getKey()).getSize();
 	}
 	
+	
+	
+	/**
+	 * 
+	 * @return the map containing all the DataColumns
+	 */
 	public Map<String, DataColumn> getDataTable(){
 		return dc;
 	}
 	
+	
+	
+
 	public ArrayList<DataColumn> getDataTableCols(){
 		ArrayList<DataColumn> dtCols = new ArrayList<>();
 		for (DataColumn entry: dc.values()) {
@@ -142,12 +151,30 @@ public class DataTable implements Serializable{
 		return dtCols;
 	}
 	
+
+	
 	
 	//**********************************************************************//
 	//Following is the filtering and transformation algorithm implementation.
 	//In these algorithms the dataTye of the target DataColumn is checked
 	//before doing transformations
 	
+	
+	
+	/**
+	 * Do the numeric filtering according to the operator and number provided by user. 
+	 * @param colName
+	 *         - The column name, which column is based on when filtering.
+	 * @param operator
+	 *         - The operator, could be >, <, >=, <=, == 
+	 * @param num
+	 *         - The number provided by user
+	 * @return the new DataTable after filtering
+	 * 
+	 * @throws DataTableException
+	 *         It throws DataTableException if the column cannot be added to the new DataTable
+	 *         
+	 */
 	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException, NumberFormatException {
 
 		DataTable result = new DataTable();
@@ -165,34 +192,34 @@ public class DataTable implements Serializable{
 		
 		
 		
-		if(operator==">") {
+		if(operator.equals(">")) {
 		    for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())>num) {
 				    keep.add(i);
 			    }
 		    }
 		}		
-		else if(operator=="<") {
+		else if(operator.equals("<")) {
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())<num) {
 				    keep.add(i);
 			    }
 		    }
 		}
-		else if(operator==">=") {
+		else if(operator.equals(">=")) {
 		    for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())>=num) {
 				    keep.add(i);
 			    }
 		    }
 		}		
-		else if(operator=="<=")
+		else if(operator.equals("<="))
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())<=num) {
 				    keep.add(i);
 			    }
 		    }		    
-		else if(operator=="=="){
+		else if(operator.equals("==")){
 			for(int i=0; i< getCol(colName).getSize();i++){
 			    if(Double.parseDouble(targetData[i].toString())==num) {
 				    keep.add(i);
@@ -206,7 +233,9 @@ public class DataTable implements Serializable{
 		
 		//create the new DataTable
 		int newSize = keep.size();
-		
+		if(newSize<=0) {
+			return result;
+		}
 		//each iteration deals with 1 column
 		for(String curColName: dc.keySet()) {
 			DataColumn curCol = getCol(curColName);
@@ -228,7 +257,18 @@ public class DataTable implements Serializable{
 	
 	
 	
-	// This algorithm filter the datacolumn by text label
+	/**
+	 * Do the textual filtering according to the operator and number provided by user. 
+	 * @param colName
+	 *         - The column name, which column is based on when filtering.
+	 * @param label
+	 *         - The text provided by user to do filtering
+	 *         
+	 * @return the new DataTable after filtering
+	 * 
+	 * @throws DataTableException
+	 *         It throws DataTableException if the column cannot be added to the new DataTable
+	 */
 	public DataTable filterByLabel(String colName, String label) throws DataTableException {
 		
 		DataTable result = new DataTable();
@@ -250,7 +290,9 @@ public class DataTable implements Serializable{
 		
 		//create the new DataTable
 		int newSize = keep.size();
-		
+		if(newSize<=0) {
+			return result;
+		}
 		//each iteration deals with 1 column
 		for(String curColName: dc.keySet()) {
 			DataColumn curCol = getCol(curColName);
