@@ -33,7 +33,7 @@ public class DataCollection implements Serializable{
 	}
 	
 	
-	DataCollection(DataCollection dc){
+	public DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
 		chartCollection = dc.chartCollection;
 		tableNum = dc.tableNum;
