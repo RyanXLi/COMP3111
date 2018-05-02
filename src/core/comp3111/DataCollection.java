@@ -221,10 +221,10 @@ public class DataCollection implements Serializable{
         	return;
         }
         if(handleMode==true) {
-        	resultDT=getDataTable(dtName);
+        	tableCollection.put(dtName, resultDT);
         }
         else {
-        addDataTable(resultDT);
+            addDataTable(resultDT);
         }
         return;
 	}
@@ -249,10 +249,10 @@ public class DataCollection implements Serializable{
 		DataTable resultDT = new DataTable();
 		resultDT = originDT.filterByLabel(colName, text);
         if(handleMode==true) {
-        	resultDT=getDataTable(dtName);
+        	tableCollection.put(dtName, resultDT);
         }
         else {
-        addDataTable(resultDT);
+            addDataTable(resultDT);
         }
 	    return;
 	}
