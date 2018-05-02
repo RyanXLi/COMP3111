@@ -221,9 +221,11 @@ public class DataCollection implements Serializable{
         	return;
         }
         if(handleMode==true) {
-        	removeDataTable(dtName);
+        	resultDT=getDataTable(dtName);
         }
+        else {
         addDataTable(resultDT);
+        }
         return;
 	}
 	
@@ -246,10 +248,12 @@ public class DataCollection implements Serializable{
 		DataTable originDT = tableCollection.get(dtName);
 		DataTable resultDT = new DataTable();
 		resultDT = originDT.filterByLabel(colName, text);
-		if(handleMode==true) {
-	      	removeDataTable(dtName);
-	    }
-	    addDataTable(resultDT);
+        if(handleMode==true) {
+        	resultDT=getDataTable(dtName);
+        }
+        else {
+        addDataTable(resultDT);
+        }
 	    return;
 	}
 	
