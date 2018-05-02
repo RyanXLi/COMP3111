@@ -27,6 +27,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * A wrapper around JavaFX linechart to support customization 
+ * and animation. 
+ * 
+ * @author Ryan LI
+ *
+ */
 public class LineDataChart extends DataChart {
 	
 	private static final long serialVersionUID = 1L;
@@ -47,6 +54,17 @@ public class LineDataChart extends DataChart {
 	public String yColName;
 	public String chartTitle;
 	
+	/**
+	 * constructor - a copy construct with the change of the 
+	 * x-axis lower and upper bound of the chart. 
+	 * 
+	 * @param another
+	 * 			- the copied LineDataChart
+	 * @param lowerBound
+	 * 			- the new lower bound of x axis
+	 * @param upperBound
+	 * 			- the new upper bound of x axis
+	 */
 	public LineDataChart(LineDataChart another, double lowerBound, double upperBound) {
 		this.xAxis = another.xAxis;
 		this.yAxis = another.yAxis;
@@ -61,6 +79,31 @@ public class LineDataChart extends DataChart {
 
 	}
 
+	/**
+	 * constructor - constructs a LineDataChart that is
+	 * ready to be drawn
+	 * 
+	 * @param dataTable
+	 * 			- the reference of the data table to create a chart from
+	 * @param xColName
+	 * 			- name of the column to be the x-axis of the chart.
+	 * 				It has to denote a numeric column
+	 * @param yColName
+	 * 			- name of the column to be the y-axis of the chart.
+	 * 				It has to denote a numeric column
+	 * @param chartTitle
+	 * 			- the title of the chart to be created
+	 * @param animate
+	 * 			- whether the line chart should be animated
+	 * @param update
+	 * 			- whether the construction is a update of a
+	 * 				original data chart
+	 * @param lowerBound
+	 * 			- the lower bound of the x-axis
+	 * @param upperBound
+	 * 			- the upper bound of the x-axis
+	 * @throws DataTableException
+	 */
 	public LineDataChart(DataTable dataTable, String xColName, String yColName, String chartTitle, boolean animate,
 			boolean update, double lowerBound, double upperBound) throws DataTableException {
 		super();
@@ -110,9 +153,8 @@ public class LineDataChart extends DataChart {
 		series.setName(xColName + " - " + yColName);
 
 		// populating the series with data
-		// As we have checked the type, it is safe to downcast to Number[]
-		Number[] xValues = (Number[]) xCol.getData();
-		Number[] yValues = (Number[]) yCol.getData();
+		Number[] xValues = Arrays.copyOf(xCol.getData(), xCol.getData().length, Number[].class);
+		Number[] yValues = Arrays.copyOf(yCol.getData(), yCol.getData().length, Number[].class);
 		
 		Double[] doubleXValues = new Double[xValues.length];
 		for (int i = 0; i < xValues.length; i++) {
