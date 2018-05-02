@@ -17,6 +17,7 @@ import java.util.ArrayList;
  *
  */
 public class DataTable implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

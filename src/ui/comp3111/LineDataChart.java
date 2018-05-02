@@ -1,5 +1,6 @@
 package ui.comp3111;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -27,14 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- * A wrapper around JavaFX linechart to support customization 
- * and animation. 
- * 
- * @author Ryan LI
- *
- */
-public class LineDataChart extends DataChart {
+public class LineDataChart extends DataChart implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private LineChart<Number, Number> lineChart;
@@ -152,7 +146,7 @@ public class LineDataChart extends DataChart {
 
 		series.setName(xColName + " - " + yColName);
 
-		// populating the series with data
+		// populating the series with data		
 		Number[] xValues = Arrays.copyOf(xCol.getData(), xCol.getData().length, Number[].class);
 		Number[] yValues = Arrays.copyOf(yCol.getData(), yCol.getData().length, Number[].class);
 		

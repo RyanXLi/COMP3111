@@ -30,12 +30,32 @@ public class SaveCSV {
 	 */
 	public static void saveCSV(String fileName, DataTable source) throws IOException, DataTableException {
 		
-		ArrayList<DataColumn> result = source.getDataTableCols();
 		String str = new String();
+		Map<String, DataColumn> dcMap = source.getDataTable();
+		
+		ArrayList<String> resultName = new ArrayList<>();
+		ArrayList<DataColumn> result = new ArrayList<>();
+		
+		for (String key: dcMap.keySet()) {
+			resultName.add(key);
+			result.add(dcMap.get(key));
+		}
+		
+		
 		// File name problem has been settled in the UI
 		File csv = new File(fileName); 
         BufferedWriter bw = new BufferedWriter(new FileWriter(csv)); 
 		
+        // Write the names in the first row
+        for (int j = 0; j < resultName.size(); j++){
+				str = resultName.get(j);// Current Data Column
+				bw.write(str);
+			if (j + 1 < result.size()) {
+				bw.write(",");						
+			}
+        }
+        bw.newLine();
+        
         // Write the ith digit of the DataColumn line-by-line
 		for (int i = 1; i <= source.getNumRow(); i++) {
 			for (int j = 0; j < result.size(); j++){
