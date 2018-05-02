@@ -9,7 +9,13 @@ import core.comp3111.DataTableException;
 import core.comp3111.DataChart;
 import core.comp3111.DataColumn;
 import core.comp3111.DataType;
-
+/**
+ * A sample DataCollection test case written using JUnit. It achieves 100% test
+ * coverage on the DataColection class
+ * 
+ * @author qchenax
+ *
+ */
 public class DataCollectionTest {
 	DataCollection dc;
 	

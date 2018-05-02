@@ -51,8 +51,21 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
-
+/**
+ * The numeric filter page
+ * @author qchenax
+ *
+ */
 public class NumericFilterScene {
+	/**
+	 * Draw the numeric filter page
+	 * @param primaryStage
+	 *        - The Stage of the application, used to return to the main page
+	 * @param dtName
+	 *        - The DataTable selected to do filtering
+	 * @return The numeric filter scene
+	 *    
+	 */
 	public static Scene numericFilter(Stage primaryStage, String dtName) {
 		
 		DataTable dt = Main.dtcl.getDataTable(dtName); 
@@ -106,12 +119,12 @@ public class NumericFilterScene {
 	    OK.disableProperty().bind(colBox.getSelectionModel().selectedItemProperty().isNull()
 	    		.or(opBox.getSelectionModel().selectedItemProperty().isNull()
 	    				.or(setNumber.textProperty().isEmpty())));
-		
-	    String colName=colBox.getSelectionModel().getSelectedItem();
-	    String operator = opBox.getSelectionModel().getSelectedItem();
-	    String num = setNumber.getText();
-	    boolean handleMode = rb1.isSelected();
+
 	    OK.setOnAction(e->{try {
+		    String colName=colBox.getSelectionModel().getSelectedItem();
+		    String operator = opBox.getSelectionModel().getSelectedItem();
+		    String num = setNumber.getText();
+		    boolean handleMode = rb1.isSelected();
 			Main.dtcl.numFilter(dtName, colName,operator,num, handleMode);}
 	        catch (DataTableException e1) {}
             primaryStage.setScene(Main.primaryScene(primaryStage));});

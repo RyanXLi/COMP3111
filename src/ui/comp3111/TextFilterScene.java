@@ -16,9 +16,22 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * The text filter page
+ * @author qchenax
+ *
+ */
 public class TextFilterScene {
-public static Scene textFilter(Stage primaryStage, String dtName) {
+	/**
+	 * Draw the text filter page
+	 * @param primaryStage
+	 *        - The Stage of the application, used to return to the main page
+	 * @param dtName
+	 *        - The DataTable selected to do filtering
+	 * @return The text filter scene
+	 *    
+	 */
+    public static Scene textFilter(Stage primaryStage, String dtName) {
 			
 	    DataTable dt = Main.dtcl.getDataTable(dtName); 
 	
@@ -67,10 +80,11 @@ public static Scene textFilter(Stage primaryStage, String dtName) {
 		OK.disableProperty().bind(colBox.getSelectionModel().selectedItemProperty().isNull()
 				.or(setText.textProperty().isEmpty()));
 		
-		String colName = colBox.getSelectionModel().getSelectedItem();
-		String text = setText.getText();
-		boolean handleMode = rb1.isSelected();
-		OK.setOnAction(e->{try {Main.dtcl.textFilter(dtName,colName , text, handleMode);}
+		OK.setOnAction(e->{try {
+			String colname = colBox.getSelectionModel().getSelectedItem();
+			String text = setText.getText();
+			boolean handleMode = rb1.isSelected();
+			Main.dtcl.textFilter(dtName,colname , text, handleMode);}
 		               catch (DataTableException e1) {}
 		               primaryStage.setScene(Main.primaryScene(primaryStage));});
 		

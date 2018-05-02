@@ -13,11 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the DataTable class.
+ * A sample DataTable test case written using JUnit. It achieves 100% test
+ * coverage on the DataTable class
  * 
- * You'll be writing tests here for the Unit Testing lab!
- * 
- * @author victorkwan
+ * @author qchenax
  *
  */
 public class DataTableTest {
@@ -131,17 +130,24 @@ public class DataTableTest {
 	}
 	
 	@Test
-	void testFilterByLabel_Empty()throws DataTableException{
-		dataTable.addCol("testStringColumn", new DataColumn());
-		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
-		assert(afterFilter.getNumRow()==dataTable.getNumRow());
+	void testFilterByOperator_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testDataColumn", testDataColumn);
+		DataTable afterFilter=dataTable.filterByOperator("testDataColumn", "<", 0);
+		assert(afterFilter.getNumRow()==0);
 	}
-	
+		
 	@Test
 	void testFilterByOperator_Default()throws DataTableException{
 		dataTable.addCol("testDataColumn", testDataColumn);
 		DataTable afterFilter=dataTable.filterByOperator("testDataColumn", "!=",4);
 		assert(afterFilter.getNumRow()==0);
+	}
+	
+	@Test
+	void testFilterByLabel_Empty()throws DataTableException{
+		dataTable.addCol("testStringColumn", new DataColumn());
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
+		assert(afterFilter.getNumRow()==dataTable.getNumRow());
 	}
 	
 
@@ -152,6 +158,12 @@ public class DataTableTest {
 		assert(afterFilter.getNumRow()==1);
 	}
 	
+	@Test
+	void testFilterByLabel_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testStringColumn", testStringColumn);
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "0");
+		assert(afterFilter.getNumRow()==0);
+	}
 	@Test
 	void testGetDataTable()throws DataTableException{
 		dataTable.addCol("testStringColumn", testStringColumn);
