@@ -19,6 +19,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * A wrapper around the JavaFX scatter chart to support drawing.
+ * 
+ * @author RyanX
+ *
+ */
 public class ScatterDataChart extends DataChart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,11 +32,21 @@ public class ScatterDataChart extends DataChart implements Serializable {
 	public DataTable dataTable;
 
 	/**
-	 * 
+	 * constructor - create a new ScatterDataChart ready to be drawn
+	 *
 	 * @param dataTable
+	 * 			- the reference of the data table to create a chart from
 	 * @param xColName
+	 * 			- name of the column to be the x-axis of the chart.
+	 * 				It has to denote a numeric column
 	 * @param yColName
+	 * 			- name of the column to be the y-axis of the chart.
+	 * 				It has to denote a numeric column
 	 * @param cateColName
+	 * 			- name of the column to determine the category of the chart.
+	 * 				It has to denote a text column
+	 * @param chartTitle
+	 * 			- the title of the chart to be created
 	 * @throws DataTableException
 	 */
 	public ScatterDataChart(DataTable dataTable, String xColName, String yColName, String cateColName, String chartTitle) throws DataTableException {
@@ -99,7 +115,15 @@ public class ScatterDataChart extends DataChart implements Serializable {
 			scatterChart.getData().add(series);
 		}
 	}
+	
+	
 
+	/**
+	 * Draw the scatter chart to the stage
+	 * 
+	 * @param primaryStage
+	 * 			- the primary stage of the application
+	 */
 	@Override
 	public void draw(final Stage primaryStage) {
 

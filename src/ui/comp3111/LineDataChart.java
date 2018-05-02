@@ -28,6 +28,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * A wrapper around the JavaFX line chart to support 
+ * drawing and animation
+ * 
+ * @author RyanX
+ *
+ */
 public class LineDataChart extends DataChart implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -176,10 +183,20 @@ public class LineDataChart extends DataChart implements Serializable{
 
 	}
 	
+	/**
+	 * Get the line chart behind the line data chart
+	 * @return the underlying line chart
+	 */
 	public LineChart<Number, Number> getLineChart() {
 		return lineChart;
 	}
 
+	/**
+	 * Draw the line chart to the stage, with animation if required
+	 * 
+	 * @param primaryStage
+	 * 			- the primary stage of the application
+	 */
 	@Override
 	public void draw(final Stage primaryStage) {
         drawChartScene(primaryStage, lineChart);
@@ -198,7 +215,7 @@ public class LineDataChart extends DataChart implements Serializable{
         } 
 	}
 	
-	public void drawChartScene(final Stage primaryStage, LineChart lineChart) {
+	private void drawChartScene(final Stage primaryStage, LineChart lineChart) {
         
 		// Layout the UI components
 		Main.container = new VBox(20);

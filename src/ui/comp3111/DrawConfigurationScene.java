@@ -69,12 +69,29 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Class for drawing the scene to generate charts
+ * 
+ * @author RyanX
+ *
+ */
 public class DrawConfigurationScene {
 	
 	public static String TYPE_LINE = "line";
 	public static String TYPE_SCATTER = "scatter";
 	public static String TYPE_ANI_LINE = "animated line";
 	
+	/**
+	 * Draw the scene for the chart generation configuration.
+	 * 
+	 * @param primaryStage
+	 * 			- primary stage for the application
+	 * @param dtName
+	 * 			- name of the data table chosen to draw chart
+	 * @param chartType
+	 * 			- the type of chart to be generated
+	 * @return The scene for the chart generation configuration
+	 */
 	public static Scene configureDrawing(Stage primaryStage, String dtName, String chartType) {
 		
 		DataTable dt = Main.dtcl.getDataTable(dtName); 		
@@ -110,14 +127,6 @@ public class DrawConfigurationScene {
 				    textColName.add(colName);
 		    }
 		}
-		
-		//// chart type
-		//Label label0= new Label("Chart Type:");
-		//label0.relocate(70, 110);
-		//ChoiceBox<String> chartType = new ChoiceBox<>();
-		//chartType.setItems(FXCollections.observableArrayList("Line", "Scatter", "Animated Line"));
-		//chartType.setPrefWidth(170);
-		//chartType.relocate(240, 105);
 		
 		// column box
 		Label label1= new Label("Column on X axis:");
