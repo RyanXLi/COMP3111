@@ -113,6 +113,7 @@ public class ScatterDataChart extends DataChart implements Serializable {
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});
 		back.relocate(550, 400);
+		container.getChildren().add(back);
 
 		BorderPane pane = new BorderPane();
 		pane.setCenter(container);

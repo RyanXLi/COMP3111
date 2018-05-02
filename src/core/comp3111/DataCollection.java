@@ -29,6 +29,7 @@ public class DataCollection implements Serializable{
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
 		chartCollection = new LinkedHashMap<String, DataChart>();
+		chartParams = new ArrayList<ArrayList<String>>();
 		tableNum=1;
 		chartNum=1;
 	}
@@ -41,6 +42,7 @@ public class DataCollection implements Serializable{
 	public DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
 		chartCollection = dc.chartCollection;
+		chartParams = dc.chartParams;
 		tableNum = dc.tableNum;
 		chartNum = dc.chartNum;
 	}

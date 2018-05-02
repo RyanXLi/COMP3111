@@ -219,7 +219,7 @@ public class DrawConfigurationScene {
 			} catch (DataTableException e1) {
 				Alert alert = new Alert(AlertType.WARNING,"Input cannot be processed");
 				alert.showAndWait();
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			}
 				
 			Alert alert = new Alert(AlertType.WARNING,"Successfully created chart!");
