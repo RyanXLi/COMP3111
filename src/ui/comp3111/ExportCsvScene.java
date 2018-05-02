@@ -60,7 +60,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+	/**
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 public class ExportCsvScene {
 	/**
 	 * Scene for export .csv button
@@ -69,6 +73,7 @@ public class ExportCsvScene {
 	 *            - original main stage
 	 * @param dtName
 	 *            - the DataTable you want to save
+	 * @return exportCsvScene
 	 */
 	public static Scene exportCsv(Stage primaryStage, String dtName) {
 		

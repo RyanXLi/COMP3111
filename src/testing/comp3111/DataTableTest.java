@@ -3,6 +3,8 @@ package testing.comp3111;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
@@ -57,6 +59,16 @@ public class DataTableTest {
 		dataTable.addCol("testDataColumn", testDataColumn);
 		dataTable.addCol("testStringColumn", testStringColumn);
 		assert(dataTable.containsColumn("testStringColumn"));
+	}
+	
+	@Test
+	void testGetDataTableCol()throws DataTableException{
+		dataTable.addCol("testDataColumn", testDataColumn);
+		dataTable.addCol("testStringColumn", testStringColumn);
+		ArrayList<DataColumn> tsColCollection = new ArrayList<>();
+		tsColCollection = dataTable.getDataTableCols();
+		
+		assert(tsColCollection.contains(testDataColumn));
 	}
 	
 	@Test

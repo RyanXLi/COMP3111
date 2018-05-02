@@ -63,7 +63,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+	/**
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 public class ImportCsvScene {
 	/**
 	 * Scene for import .csv button
@@ -72,7 +76,7 @@ public class ImportCsvScene {
 	 *            - original main stage
 	 * @param dtName
 	 *            - the DataTable you want to save
-	 * 
+	 * @return importCsvScene
 	 */
 	public static Scene importCsv(Stage primaryStage, String dtName) {
 		
