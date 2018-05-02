@@ -9,6 +9,8 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
@@ -168,10 +170,10 @@ public class Main extends Application {
 		
 		//The file menu
 		Menu fileMenu = new Menu("File");
-		MenuItem importMenuItem = new MenuItem("import from CSV");
-		MenuItem exportMenuItem = new MenuItem("export as CSV");
-		MenuItem saveMenuItem = new MenuItem("save as 3111");
-		MenuItem loadMenuItem = new MenuItem("import from 3111");
+		MenuItem importMenuItem = new MenuItem("import DataTable from .csv");
+		MenuItem exportMenuItem = new MenuItem("export DataTable as .csv");
+		MenuItem saveMenuItem = new MenuItem("save Everything as .comp3111");
+		MenuItem loadMenuItem = new MenuItem("import from .comp3111");
 		
 		fileMenu.getItems().addAll(importMenuItem,exportMenuItem, loadMenuItem,saveMenuItem
 		     );

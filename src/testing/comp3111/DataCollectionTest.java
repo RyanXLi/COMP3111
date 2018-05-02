@@ -10,6 +10,14 @@ import core.comp3111.DataColumn;
 import core.comp3111.DataType;
 import ui.comp3111.DataChart;
 
+/**
+ * A sample DataCollection test case written using JUnit. It achieves 100% test
+ * coverage on the DataColection class
+ * 
+ * @author qchenax
+ *
+ */
+
 public class DataCollectionTest {
 	DataCollection dc;
 	
@@ -96,15 +104,14 @@ public class DataCollectionTest {
 		dc.numFilter("DataTable1", "testDataColumn", ">", "3", false);
 		assert(dc.getDataTable("DataTable2").getNumRow()==3);
 	}
-	/*@Test
+	@Test
 	void testNumFilter_NumberFormatException() throws DataTableException,NumberFormatException {
 		DataTable dataTable= new DataTable();
 		DataColumn dataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2,3,4,5,6});
 		dataTable.addCol("testDataColumn", dataColumn);
 		dc.addDataTable(dataTable);
 		dc.numFilter("DataTable1", "testDataColumn", ">", "ABC", true);
-		assertThrows(NumberFormatException.class,()->dc.numFilter("DataTable1", "testDataColumn", ">", "ABC", true));
-		}*/
+	}
 	
 	
 	@Test

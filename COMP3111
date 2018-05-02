@@ -1,0 +1,6 @@
+tree a40e476275067696e3c46bd151923de9879ca987
+parent 47d5ba4551bb9ee6dc3340e8b2f290b4dcd2ea66
+author qchen <qchen@10.89.252.11> 1523515291 +0800
+committer qchen <qchen@10.89.252.11> 1523515291 +0800
+
+Implemented the skeleton for our project's UI.

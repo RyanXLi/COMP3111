@@ -22,7 +22,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-/* A SaveCSV file test
+/** A Save/Load .comp3111 file test
  * 
  * @author xzhaoar
  *
@@ -33,20 +33,35 @@ class EnvirHandleTest {
 	DataColumn testStringColumn;
 	DataCollection dc= new DataCollection();
 	DataCollection test = new DataCollection();
-    
+	/** 
+	 * Initialize the test data needed.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */
 	@BeforeEach
     void init() {
     	//testDataColumn = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2,3});
     	testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"1","2","3"});
     	dataTable= new DataTable();
     }
-    
+	/** 
+	 * Test for satisfying the 100 coverage.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */    
 	 @Test
 	    void testConstructor() {
 	    	EnvirHandler x = new EnvirHandler();
 	    	assert(x.init == "Success");
 	    }
-	
+	/** 
+	 * Test for Saving and Loading, the dataCollection should be the same.
+	 * 
+	 * @author xzhaoar
+	 *
+	 */   	
 	@Test
 	void writeFileTest() throws DataTableException, IOException, ClassNotFoundException {
 		//dataTable.addCol("testDataColumn", testDataColumn);
