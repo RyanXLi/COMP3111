@@ -13,6 +13,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class ScatterDataChart extends DataChart {
 
 	private static final long serialVersionUID = 1L;
 	private ScatterChart<Number, Number> scatterChart;
+	public DataTable dataTable;
 
 	/**
 	 * 
@@ -104,25 +106,18 @@ public class ScatterDataChart extends DataChart {
 		VBox container = new VBox(20);
 		container.getChildren().add(scatterChart);
 		container.setAlignment(Pos.CENTER);
+		
+		Button back= new Button("back");
+		back.setOnAction(e->{
+			primaryStage.setScene(Main.primaryScene(primaryStage));
+		});
+		back.relocate(550, 400);
 
 		BorderPane pane = new BorderPane();
 		pane.setCenter(container);
-        Scene scatterChartScene = new Scene(pane, 600, 600);
+        Scene scatterChartScene = new Scene(pane, 600, 450);
         
         primaryStage.setScene(scatterChartScene);
-
-        //// New window (Stage)
-        //Stage scatterChartWindow = new Stage();
-        //scatterChartWindow.setTitle("Second Stage");
-        //scatterChartWindow.setScene(scatterChartScene);
-        //
-        //// Set position of second window, related to primary window.
-        //scatterChartWindow.setX(primaryStage.getX() + 200);
-        //scatterChartWindow.setY(primaryStage.getY() + 100);
-        //
-        //scatterChartWindow.show();
         
 	}
-
-
 }

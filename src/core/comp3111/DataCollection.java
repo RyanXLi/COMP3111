@@ -1,6 +1,7 @@
 package core.comp3111;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -252,6 +253,7 @@ public class DataCollection implements Serializable{
 	
 	private Map<String, DataTable> tableCollection;
 	private Map<String, DataChart> chartCollection;
+	public ArrayList<ArrayList<String>> chartParams;
     private Integer tableNum;
     private Integer chartNum;
 }
