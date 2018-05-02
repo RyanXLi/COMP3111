@@ -63,6 +63,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Export3111Scene {
+	/**
+	 * Scene for export 3111 button
+	 * @author xzhaoar
+	 * @param Stage
+	 *            - original main stage
+	 * @param dtName
+	 *            - the DataTable you want to save
+	 */
 	
 	public static Scene export3111(Stage primaryStage, String dtName) {
 		
@@ -77,7 +85,7 @@ public class Export3111Scene {
 		FileChooser fc = new FileChooser();
 		Button filechooser = new Button("Choose from local file");
 		filechooser.setOnAction(e->{
-			fc.setTitle("Subsititude Localfile .csv");
+			fc.setTitle("Subsititude Localfile .comp3111");
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
