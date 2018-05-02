@@ -1,56 +1,26 @@
 package ui.comp3111;
 
 import core.comp3111.DataCollection;
-import core.comp3111.DataChart;
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
+import core.comp3111.DataTableException;
 import core.comp3111.DataType;
-import core.comp3111.SampleDataGenerator;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.scene.Scene;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.application.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxListCell;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
 
 /**
  * The Main class of this GUI application
@@ -62,8 +32,53 @@ public class Main extends Application {
  
 	
     static DataCollection dtcl= new DataCollection();
+    public static LineDataChart aniCache = null;
     private static ListView<String> dataTableList = new ListView<String>();
 	private static ListView<String> chartList = new ListView<String>();
+	private boolean isDebugging = true;
+	
+	public static void animate(Stage primaryStage, LineDataChart orig) {
+		//while (orig.isAnimated) {
+			System.out.println("one animation");
+			// calculate new bounds
+			double xRangeLen = (orig.origUpperBound - orig.origLowerBound) / orig.fps / orig.timeOfOnePlay;
+			double upperBound, lowerBound;
+			if (Main.aniCache == null || (Main.aniCache.curUpperBound + xRangeLen >= Main.aniCache.origUpperBound)) {
+				// TODO: change "==null"
+				// first frame of animation OR next frame over bound
+				lowerBound = orig.origLowerBound;
+				upperBound = orig.shownRatio * orig.origUpperBound;
+			} else {
+				lowerBound = Main.aniCache.curLowerBound + xRangeLen;
+				upperBound = Main.aniCache.curUpperBound + xRangeLen;
+			}
+			
+			//System.out.println(lowerBound);
+			//System.out.println(upperBound);
+			//System.out.println();
+			
+			
+			try {
+				Main.aniCache = new LineDataChart(orig.dataTable, orig.xColName, orig.yColName, orig.chartTitle, false,
+						true, lowerBound, upperBound);
+			} catch (DataTableException e1) {
+				e1.printStackTrace();
+			}
+			
+			Main.aniCache.curLowerBound = lowerBound;
+			Main.aniCache.curUpperBound = upperBound;	
+
+			primaryStage.setScene(new Scene(Main.aniCache.getLineChart()));
+			
+			//try {
+			//	Thread.sleep((long)(2000));
+			//} catch (InterruptedException e) {
+			//	e.printStackTrace();
+			//}
+		//}
+
+
+	}
 
  
 	/**
@@ -73,8 +88,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 			 
         DataTable dt1 = new DataTable();
-		dtcl.addDataTable(dt1);
-       
+        if (isDebugging) {
 	    	DataColumn testDataColumn   = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2, 3, 4, 5,6,7});
 	    	DataColumn testDoubleColumn = new DataColumn(DataType.TYPE_NUMBER, new Double[] {3.3, 2.2, 1.1, 5.5, 4.4,7.7,6.6});
 	    	DataColumn testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"a","b","a", "a", "b","b","a"});
@@ -86,10 +100,9 @@ public class Main extends Application {
 		    	//dt1.addCol("testCommaColumn", testCommaColumn );
 	    	} catch (Exception e) {
 			}
-      
+        }
     	
-
-
+		dtcl.addDataTable(dt1);
 
 	    primaryStage.setScene(primaryScene(primaryStage));
 	    primaryStage.setTitle("PlaYFuL BluE MoOn");
@@ -143,6 +156,9 @@ public class Main extends Application {
 		//"View chart" button, enabled only when a chart is selected.
 		Button button = new Button("View chart");
 		button.disableProperty().bind(chartList.getSelectionModel().selectedItemProperty().isNull());
+		button.setOnAction(e->{
+			dtcl.getDataChart(chartList.getSelectionModel().getSelectedItem()).draw(primaryStage);
+		});
 		StackPane stack3=new StackPane();
 		stack3.getChildren().add(button);
 		stack3.setLayoutX(480);
@@ -189,11 +205,47 @@ public class Main extends Application {
 
 
 		//The draw menu, enabled only when a datatable is selected
-		Menu drawMenu = new Menu("Draw");
+		Menu drawMenu = new Menu("Create Chart");
 		MenuItem lineItem = new MenuItem("line chart");
 		MenuItem scatterItem = new MenuItem("scatter chart");
-		drawMenu.getItems().addAll(lineItem, scatterItem);
+		MenuItem animatedLineItem = new MenuItem("animated line chart");
+		drawMenu.getItems().addAll(lineItem, scatterItem, animatedLineItem);
 		drawMenu.disableProperty().bind(dataTableList.getSelectionModel().selectedItemProperty().isNull());
+		
+		lineItem.setOnAction(e->{
+			primaryStage.setScene(
+					DrawConfigurationScene.configureDrawing(
+							primaryStage,
+							dataTableList.getSelectionModel().getSelectedItem(),
+							DrawConfigurationScene.TYPE_LINE
+							)
+					);
+			}
+		);
+		
+		scatterItem.setOnAction(e->{
+			primaryStage.setScene(
+					DrawConfigurationScene.configureDrawing(
+							primaryStage,
+							dataTableList.getSelectionModel().getSelectedItem(),
+							DrawConfigurationScene.TYPE_SCATTER
+							)
+					);
+			}
+		);
+		
+		animatedLineItem.setOnAction(e->{
+			primaryStage.setScene(
+					DrawConfigurationScene.configureDrawing(
+							primaryStage,
+							dataTableList.getSelectionModel().getSelectedItem(),
+							DrawConfigurationScene.TYPE_ANI_LINE
+							)
+					);
+			}
+		);
+		
+		
 		
 		menuBar.getMenus().addAll(fileMenu, filterMenu, drawMenu);
 		

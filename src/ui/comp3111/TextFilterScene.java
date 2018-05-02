@@ -35,7 +35,7 @@ public class TextFilterScene {
 			
 	    DataTable dt = Main.dtcl.getDataTable(dtName); 
 	
-		// Find out all numeric columns 
+		// Find out all text columns 
 		ArrayList<String> textColName= new ArrayList<>();		
 		if(dt.getNumCol()>0) {
 		    for(String colName:dt.getDataTable().keySet()) {

@@ -6,9 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import core.comp3111.DataCollection;
 import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
-import core.comp3111.DataChart;
 import core.comp3111.DataColumn;
 import core.comp3111.DataType;
+import ui.comp3111.DataChart;
+
 /**
  * A sample DataCollection test case written using JUnit. It achieves 100% test
  * coverage on the DataColection class
@@ -16,6 +17,7 @@ import core.comp3111.DataType;
  * @author qchenax
  *
  */
+
 public class DataCollectionTest {
 	DataCollection dc;
 	
