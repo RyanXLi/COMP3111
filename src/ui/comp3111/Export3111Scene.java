@@ -89,7 +89,7 @@ public class Export3111Scene {
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
-				filename.appendText(file.getName());
+				filename.appendText(file.getAbsolutePath());
 			}
 		});
 		filechooser.relocate(150,110);
@@ -127,8 +127,8 @@ public class Export3111Scene {
 		label1.setStyle("-fx-font-weight: bold");
 		label1.relocate(80, 80);
 		Label label2= new Label("file format should be xxx.comp3111");
-		label1.setStyle("-fx-font-weight: bold");
-		label1.relocate(150, 140);
+		label2.setStyle("-fx-font-weight: bold");
+		label2.relocate(150, 140);
 		
 		
 	    Pane ics1 = new Pane();

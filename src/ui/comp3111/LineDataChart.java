@@ -1,5 +1,6 @@
 package ui.comp3111;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -27,7 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class LineDataChart extends DataChart {
+public class LineDataChart extends DataChart implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private LineChart<Number, Number> lineChart;
