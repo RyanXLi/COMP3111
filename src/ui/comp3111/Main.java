@@ -51,6 +51,14 @@ public class Main extends Application {
 	private static boolean isDebugging = true;
 	public static boolean isAnimated = false;
 
+	/**
+	 * Reconstructs the data charts in the data collection at deserialization
+	 * 
+	 * @param chartParams
+	 * 			- the parameters required to reconstruct the data charts
+	 * @return
+	 * 			- the reconstructed data charts
+	 */
 	public static Map<String, DataChart> reconstruct(ArrayList<ArrayList<String>> chartParams) {
 		Map<String, DataChart> ret = new LinkedHashMap<String, DataChart>();
 		for (int i = 0; i < chartParams.size(); i++) {
@@ -108,7 +116,9 @@ public class Main extends Application {
 	 * The method of drawing a frame of the animation
 	 * 
 	 * @param primaryStage
+	 * 			- the primary stage of the application
 	 * @param orig
+	 * 			- the line data chart storing the last frame of the application
 	 */
 	public static void animate(Stage primaryStage, LineDataChart orig) {
 		
@@ -143,7 +153,13 @@ public class Main extends Application {
 			
 	}
 
-		  @Override
+	/**
+	 * The method to start the application
+	 * 
+	 * @param primaryStage
+	 * 			- the primary stage of the application
+	 */
+	@Override
 	public void start(Stage primaryStage) {
 			 
         DataTable dt1 = new DataTable();
@@ -168,12 +184,24 @@ public class Main extends Application {
         primaryStage.show();    
     }
   
-  
+	/**
+	 * The main method of the application.
+	 * 
+	 * @param args 
+	 * 			- command line arguments
+	 */
     public static void main(String[] args) {
         launch(args);
 	    }
   
   
+    /**
+     * Generate the primary scene of the application
+     * 
+     * @param primaryStage
+     * 			- the primary stage of the application
+     * @return the primary scene of the application
+     */
     public static Scene primaryScene(Stage primaryStage) {
 		//The root pane contains the menu bar at the top  
 
