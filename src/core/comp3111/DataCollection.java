@@ -32,8 +32,12 @@ public class DataCollection implements Serializable{
 		chartNum=1;
 	}
 	
-	
-	DataCollection(DataCollection dc){
+	/**
+	 * Construct - copy from a DataCollection
+	 * @param dc
+	 *     - The DataCollection copying from
+	 */
+	public DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
 		chartCollection = dc.chartCollection;
 		tableNum = dc.tableNum;

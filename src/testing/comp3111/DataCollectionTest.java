@@ -142,4 +142,12 @@ public class DataCollectionTest {
 		dc.textFilter("DataTable1", "testDataColumn", "3", false);
 		assert(dc.getDataTable("DataTable2").getNumRow()==1);
 	}
+	
+	@Test
+	void testCopyConstructor() {
+		DataTable dt = new DataTable();
+		dc.addDataTable(dt);
+		DataCollection dataCollection= new DataCollection(dc);
+		assert(dataCollection.containsTable("DataTable1"));
+	}
 }
