@@ -109,6 +109,7 @@ public class Import3111Scene {
 					e1.printStackTrace();
 				}
 				Main.dtcl = temp;
+				Main.dtcl.chartCollection = Main.reconstruct(Main.dtcl.chartParams);
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});

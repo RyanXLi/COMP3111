@@ -252,7 +252,7 @@ public class DataCollection implements Serializable{
 	}
 	
 	private Map<String, DataTable> tableCollection;
-	private Map<String, DataChart> chartCollection;
+	public transient Map<String, DataChart> chartCollection;
     private Integer tableNum;
     private Integer chartNum;
 }
