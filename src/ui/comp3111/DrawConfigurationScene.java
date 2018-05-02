@@ -115,7 +115,7 @@ public class DrawConfigurationScene {
 		ArrayList<String> numericColName = new ArrayList<>();		
 		if(dt.getNumCol()>0) {
 		    for(String colName : dt.getDataTable().keySet()) {
-			    if(dt.getCol(colName).getTypeName() == DataType.TYPE_NUMBER) 
+			    if(dt.getCol(colName).getTypeName().equals(DataType.TYPE_NUMBER))
 			    	numericColName.add(colName);
 		    }
 		}
@@ -123,7 +123,7 @@ public class DrawConfigurationScene {
 		ArrayList<String> textColName= new ArrayList<>();		
 		if(dt.getNumCol()>0) {
 		    for(String colName:dt.getDataTable().keySet()) {
-			    if(dt.getCol(colName).getTypeName() == DataType.TYPE_STRING)
+			    if(dt.getCol(colName).getTypeName().equals(DataType.TYPE_STRING))
 				    textColName.add(colName);
 		    }
 		}
