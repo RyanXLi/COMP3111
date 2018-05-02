@@ -99,7 +99,7 @@ public class ImportCsvScene {
 		
 		// TextField
 		TextField filename = new TextField ();
-		filename.setPromptText("Enter a .csv filename");
+		filename.setPromptText("Enter a .csv filepath");
 		filename.relocate(150, 80);
 		
 		// file chooser button
@@ -110,7 +110,7 @@ public class ImportCsvScene {
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
-				filename.appendText(file.getName());
+				filename.appendText(file.getAbsolutePath());
 			}
 		});
 		filechooser.relocate(150,110);

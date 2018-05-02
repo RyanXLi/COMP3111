@@ -17,6 +17,7 @@ import java.util.ArrayList;
  *
  */
 public class DataTable implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -245,7 +246,7 @@ public class DataTable implements Serializable{
 			int pos = 0;
 			for(int i : keep) {
 				newColData[pos] = curColData[i];
-				i++;
+				pos++;
 			}
 			
 			DataColumn newCol= new DataColumn(curCol.getTypeName(), newColData);
@@ -302,7 +303,7 @@ public class DataTable implements Serializable{
 			int pos = 0;
 			for(int i : keep) {
 				newColData[pos] = curColData[i];
-				i++;
+				pos++;
 			}
 			
 			DataColumn newCol= new DataColumn(curCol.getTypeName(), newColData);

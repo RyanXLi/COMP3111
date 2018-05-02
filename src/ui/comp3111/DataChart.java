@@ -11,9 +11,11 @@ import javafx.stage.Stage;
 
 public class DataChart implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
 	public DataChart() {}
 	
-	private static final long serialVersionUID = 1L;
+	
 	
 	protected NumberAxis xAxis = null;
 	protected NumberAxis yAxis = null;

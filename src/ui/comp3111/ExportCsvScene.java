@@ -87,7 +87,7 @@ public class ExportCsvScene {
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
-				filename.appendText(file.getName());
+				filename.appendText(file.getAbsolutePath());
 			}
 		});
 		filechooser.relocate(150,110);

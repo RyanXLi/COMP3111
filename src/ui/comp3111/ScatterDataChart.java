@@ -1,5 +1,6 @@
 package ui.comp3111;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,7 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ScatterDataChart extends DataChart {
+public class ScatterDataChart extends DataChart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private ScatterChart<Number, Number> scatterChart;

@@ -191,7 +191,7 @@ public class LoadCSV {
 				for (int j = 0; j < csvList.size(); j++) {
 					temp.add(Double.parseDouble(csvList.get(j).get(i)));
 				}
-				DataColumn newCol = new DataColumn("Number", temp.toArray());
+				DataColumn newCol = new DataColumn(DataType.TYPE_NUMBER, temp.toArray());
 				if (!result.containsColumn(nameMap.get(i))) {
 					result.addCol(nameMap.get(i), newCol);
 				} else {
@@ -207,7 +207,7 @@ public class LoadCSV {
 				for (int j = 0; j < csvList.size(); j++) {
 					temp.add(csvList.get(j).get(i));
 				}
-				DataColumn newCol = new DataColumn("Number", temp.toArray());
+				DataColumn newCol = new DataColumn(DataType.TYPE_STRING, temp.toArray());
 				if (!result.containsColumn(nameMap.get(i))) {
 					result.addCol(nameMap.get(i), newCol);
 				} else {

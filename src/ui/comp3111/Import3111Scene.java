@@ -75,7 +75,7 @@ public class Import3111Scene {
 			
 		// TextField
 		TextField filename = new TextField ();
-		filename.setPromptText("Enter a .comp3111 filename");
+		filename.setPromptText("Enter a .comp3111 filepath");
 		filename.relocate(150, 80);
 		
 		// file chooser button
@@ -86,7 +86,7 @@ public class Import3111Scene {
 			File file = fc.showOpenDialog(primaryStage);
 			if (file != null) {
 				filename.clear();
-				filename.appendText(file.getName());
+				filename.appendText(file.getAbsolutePath());
 			}
 		});
 		filechooser.relocate(150,110);
@@ -109,6 +109,7 @@ public class Import3111Scene {
 					e1.printStackTrace();
 				}
 				Main.dtcl = temp;
+				Main.dtcl.chartCollection = Main.reconstruct(Main.dtcl.chartParams);
 			}
 			primaryStage.setScene(Main.primaryScene(primaryStage));
 		});
