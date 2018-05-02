@@ -6,18 +6,22 @@ import core.comp3111.DataTable;
 import core.comp3111.DataTableException;
 import core.comp3111.DataType;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -35,50 +39,50 @@ public class Main extends Application {
     public static LineDataChart aniCache = null;
     private static ListView<String> dataTableList = new ListView<String>();
 	private static ListView<String> chartList = new ListView<String>();
+	public static VBox container;
+	public static Timeline timeline;
 
-	private boolean isDebugging = true;
+	private static boolean isDebugging = true;
+	public static boolean isAnimated = false;
+
 	
+	/**
+	 * The method of drawing a frame of the animation
+	 * 
+	 * @param primaryStage
+	 * @param orig
+	 */
 	public static void animate(Stage primaryStage, LineDataChart orig) {
-		//while (orig.isAnimated) {
-			System.out.println("one animation");
-			// calculate new bounds
-			double xRangeLen = (orig.origUpperBound - orig.origLowerBound) / orig.fps / orig.timeOfOnePlay;
-			double upperBound, lowerBound;
-			if (Main.aniCache == null || (Main.aniCache.curUpperBound + xRangeLen >= Main.aniCache.origUpperBound)) {
-				// TODO: change "==null"
-				// first frame of animation OR next frame over bound
-				lowerBound = orig.origLowerBound;
-				upperBound = orig.shownRatio * orig.origUpperBound;
-			} else {
-				lowerBound = Main.aniCache.curLowerBound + xRangeLen;
-				upperBound = Main.aniCache.curUpperBound + xRangeLen;
-			}
-			
-			//System.out.println(lowerBound);
-			//System.out.println(upperBound);
-			//System.out.println();
-			
-			
-			try {
-				Main.aniCache = new LineDataChart(orig.dataTable, orig.xColName, orig.yColName, orig.chartTitle, false,
-						true, lowerBound, upperBound);
-			} catch (DataTableException e1) {
-				e1.printStackTrace();
-			}
-			
-			Main.aniCache.curLowerBound = lowerBound;
-			Main.aniCache.curUpperBound = upperBound;	
+		
+		isAnimated = true;
 
-			primaryStage.setScene(new Scene(Main.aniCache.getLineChart()));
+		// calculate new bounds
+		double xRangeLen = (orig.origUpperBound - orig.origLowerBound) / orig.fps / orig.timeOfOnePlay;
+		double upperBound, lowerBound;
+		if (Main.aniCache == null || (Main.aniCache.curUpperBound + xRangeLen >= Main.aniCache.origUpperBound)) {
+			// TODO: change "==null"
+			// first frame of animation OR next frame over bound
+			lowerBound = orig.origLowerBound;
+			upperBound = orig.shownRatio * orig.origUpperBound;
+		} else {
+			lowerBound = Main.aniCache.curLowerBound + xRangeLen;
+			upperBound = Main.aniCache.curUpperBound + xRangeLen;
+		}
+					
+		
+		try {
+			Main.aniCache = new LineDataChart(orig.dataTable, orig.xColName, orig.yColName, orig.chartTitle, false,
+					true, lowerBound, upperBound);
+		} catch (DataTableException e1) {
+			e1.printStackTrace();
+		}
+		
+		Main.aniCache.curLowerBound = lowerBound;
+		Main.aniCache.curUpperBound = upperBound;	
+
+		//Main.aniCache.draw(primaryStage);
+		Main.container.getChildren().set(0, Main.aniCache.getLineChart());
 			
-			//try {
-			//	Thread.sleep((long)(2000));
-			//} catch (InterruptedException e) {
-			//	e.printStackTrace();
-			//}
-		//}
-
-
 	}
 
 		  @Override

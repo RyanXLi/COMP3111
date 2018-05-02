@@ -1,10 +1,9 @@
 package ui.comp3111;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import javax.print.attribute.standard.MediaSize.Other;
+import com.sun.xml.internal.ws.api.server.Container;
 
 import core.comp3111.DataColumn;
 import core.comp3111.DataTable;
@@ -21,9 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,7 +31,7 @@ public class LineDataChart extends DataChart {
 	
 	private static final long serialVersionUID = 1L;
 	private LineChart<Number, Number> lineChart;
-	public boolean isAnimated = false;
+	public boolean isFirstFrame = false;
 	public double origLowerBound;
 	public double origUpperBound;
 	public double curLowerBound;
@@ -48,13 +47,11 @@ public class LineDataChart extends DataChart {
 	public String yColName;
 	public String chartTitle;
 	
-	Timeline timeline;
-	
 	public LineDataChart(LineDataChart another, double lowerBound, double upperBound) {
 		this.xAxis = another.xAxis;
 		this.yAxis = another.yAxis;
 		this.lineChart = another.lineChart;
-		this.isAnimated = another.isAnimated;
+		this.isFirstFrame = another.isFirstFrame;
 		
 		this.origLowerBound = another.origLowerBound;
 		this.origUpperBound = another.origUpperBound;
@@ -86,12 +83,12 @@ public class LineDataChart extends DataChart {
 			throw new DataTableException("Selected data column cannot be processed");
 		}
 		
-		isAnimated = animate;
+		isFirstFrame = animate;
 
 		if (!update) {
-			xAxis = new NumberAxis();
+			xAxis = new NumberAxis();			
 		} else {
-			xAxis = new NumberAxis(lowerBound, upperBound, 0.1);
+			xAxis = new NumberAxis(lowerBound, upperBound, 0.1 * (upperBound - lowerBound));
 		}
 		xAxis.setForceZeroInRange(false);
 		yAxis = new NumberAxis();
@@ -99,6 +96,8 @@ public class LineDataChart extends DataChart {
 		xAxis.setLabel(xColName);
 		yAxis.setLabel(yColName);
 		
+		xAxis.setAnimated(false);
+		yAxis.setAnimated(false);
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
 		lineChart.setTitle(chartTitle);
@@ -144,80 +143,52 @@ public class LineDataChart extends DataChart {
 	public LineChart<Number, Number> getLineChart() {
 		return lineChart;
 	}
-	
-	//private void drawHelper(final Stage primaryStage) {
-	//	//Main.aniCache = new LineDataChart(this);
-	//	
-	//	// calculate new bounds
-	//	double xRangeLen = (origUpperBound - origLowerBound) / fps / timeOfOnePlay;
-	//	if ((Math.abs(origLowerBound - curLowerBound) <= ERR && Math.abs(origLowerBound - curLowerBound) <= ERR)
-	//			|| (curUpperBound + xRangeLen >= origUpperBound)) {
-	//		// first frame of animation OR next frame over bound
-	//		curLowerBound = origLowerBound;
-	//		curUpperBound = shownRatio * origUpperBound;
-	//	} else {
-	//		curLowerBound += xRangeLen;
-	//		curUpperBound += xRangeLen;
-	//	}
-	//	
-	//	((NumberAxis)(lineChart.getXAxis())).setLowerBound(curLowerBound);
-	//	((NumberAxis)(lineChart.getXAxis())).setUpperBound(curUpperBound);
-	//	//draw(primaryStage);
-	//	
-	//	try {
-	//		Thread.sleep((long)(1000/fps));
-	//	} catch (InterruptedException e) {
-	//		e.printStackTrace();
-	//	}
-    //
-	//	// recurse
-	//	drawHelper(primaryStage);
-	//}
 
 	@Override
 	public void draw(final Stage primaryStage) {
-        
-        if (isAnimated) {
+        drawChartScene(primaryStage, lineChart);
+        if (isFirstFrame) {
         	LineDataChart thisRef = this;
         	
-    		timeline = new Timeline(new KeyFrame(Duration.millis(1000/fps), new EventHandler<ActionEvent>() {  
+    		Main.timeline = new Timeline(new KeyFrame(Duration.millis(1000/fps), new EventHandler<ActionEvent>() {  
 
     		    @Override
     		    public void handle(ActionEvent event) {
     		        Main.animate(primaryStage, thisRef);
     		    }
     		}));
-    		timeline.setCycleCount(Animation.INDEFINITE);
-    		timeline.play();
- 	
-        } else {
-    		// Layout the UI components
-    		VBox container = new VBox(20);
-    		container.getChildren().add(lineChart);
-    		container.setAlignment(Pos.CENTER);
-
-    		BorderPane pane = new BorderPane();
-    		pane.setCenter(container);
-            Scene lineChartScene = new Scene(pane, 600, 600);
-            
-            primaryStage.setScene(lineChartScene);
-            
-            //// New window (Stage)
-            //Stage lineChartWindow = new Stage();
-            //lineChartWindow.setTitle("Second Stage");
-            //lineChartWindow.setScene(lineChartScene);
-            //
-            //// Set position of second window, related to primary window.
-            //lineChartWindow.setX(primaryStage.getX() + 200);
-            //lineChartWindow.setY(primaryStage.getY() + 100);
-            //
-            //lineChartWindow.show();
-
-        		//// Apply CSS to style the GUI components
-        		//pane.getStyleClass().add("screen-background");
-        }
-            
-
+    		Main.timeline.setCycleCount(Animation.INDEFINITE);
+    		Main.timeline.play();
+        } 
 	}
+	
+	public void drawChartScene(final Stage primaryStage, LineChart lineChart) {
+        
+		// Layout the UI components
+		Main.container = new VBox(20);
+		Main.container.getChildren().add(lineChart);
+		Main.container.setAlignment(Pos.CENTER);
+		
+		Button back= new Button("back");
+		back.setOnAction(e->{
+			if (Main.isAnimated) {
+				Main.isAnimated = false;
+				Main.aniCache = null;
+				Main.container = null;
+				Main.timeline.stop();
+			}
+			primaryStage.setScene(Main.primaryScene(primaryStage));
+			}
+		);
+		back.relocate(550, 400);
+	
+		Main.container.getChildren().add(back);
 
+		BorderPane pane = new BorderPane();
+		pane.setCenter(Main.container);
+	
+        Scene lineChartScene = new Scene(pane, 600, 450);
+        
+        primaryStage.setScene(lineChartScene);
+	}
 }
