@@ -246,7 +246,6 @@ public class DataTable implements Serializable{
 			for(int i : keep) {
 				newColData[pos] = curColData[i];
 				pos++;
-				System.out.println(curColData[i]);
 			}
 			
 			DataColumn newCol= new DataColumn(curCol.getTypeName(), newColData);
