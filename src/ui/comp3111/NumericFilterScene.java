@@ -119,12 +119,12 @@ public class NumericFilterScene {
 	    OK.disableProperty().bind(colBox.getSelectionModel().selectedItemProperty().isNull()
 	    		.or(opBox.getSelectionModel().selectedItemProperty().isNull()
 	    				.or(setNumber.textProperty().isEmpty())));
-		
-	    String colName=colBox.getSelectionModel().getSelectedItem();
-	    String operator = opBox.getSelectionModel().getSelectedItem();
-	    String num = setNumber.getText();
-	    boolean handleMode = rb1.isSelected();
+
 	    OK.setOnAction(e->{try {
+		    String colName=colBox.getSelectionModel().getSelectedItem();
+		    String operator = opBox.getSelectionModel().getSelectedItem();
+		    String num = setNumber.getText();
+		    boolean handleMode = rb1.isSelected();
 			Main.dtcl.numFilter(dtName, colName,operator,num, handleMode);}
 	        catch (DataTableException e1) {}
             primaryStage.setScene(Main.primaryScene(primaryStage));});

@@ -80,10 +80,11 @@ public class TextFilterScene {
 		OK.disableProperty().bind(colBox.getSelectionModel().selectedItemProperty().isNull()
 				.or(setText.textProperty().isEmpty()));
 		
-		String colName = colBox.getSelectionModel().getSelectedItem();
-		String text = setText.getText();
-		boolean handleMode = rb1.isSelected();
-		OK.setOnAction(e->{try {Main.dtcl.textFilter(dtName,colName , text, handleMode);}
+		OK.setOnAction(e->{try {
+			String colname = colBox.getSelectionModel().getSelectedItem();
+			String text = setText.getText();
+			boolean handleMode = rb1.isSelected();
+			Main.dtcl.textFilter(dtName,colname , text, handleMode);}
 		               catch (DataTableException e1) {}
 		               primaryStage.setScene(Main.primaryScene(primaryStage));});
 		

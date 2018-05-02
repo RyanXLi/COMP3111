@@ -233,7 +233,9 @@ public class DataTable implements Serializable{
 		
 		//create the new DataTable
 		int newSize = keep.size();
-		
+		if(newSize<=0) {
+			return result;
+		}
 		//each iteration deals with 1 column
 		for(String curColName: dc.keySet()) {
 			DataColumn curCol = getCol(curColName);
@@ -288,7 +290,9 @@ public class DataTable implements Serializable{
 		
 		//create the new DataTable
 		int newSize = keep.size();
-		
+		if(newSize<=0) {
+			return result;
+		}
 		//each iteration deals with 1 column
 		for(String curColName: dc.keySet()) {
 			DataColumn curCol = getCol(curColName);

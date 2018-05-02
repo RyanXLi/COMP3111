@@ -130,17 +130,24 @@ public class DataTableTest {
 	}
 	
 	@Test
-	void testFilterByLabel_Empty()throws DataTableException{
-		dataTable.addCol("testStringColumn", new DataColumn());
-		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
-		assert(afterFilter.getNumRow()==dataTable.getNumRow());
+	void testFilterByOperator_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testDataColumn", testDataColumn);
+		DataTable afterFilter=dataTable.filterByOperator("testDataColumn", "<", 0);
+		assert(afterFilter.getNumRow()==0);
 	}
-	
+		
 	@Test
 	void testFilterByOperator_Default()throws DataTableException{
 		dataTable.addCol("testDataColumn", testDataColumn);
 		DataTable afterFilter=dataTable.filterByOperator("testDataColumn", "!=",4);
 		assert(afterFilter.getNumRow()==0);
+	}
+	
+	@Test
+	void testFilterByLabel_Empty()throws DataTableException{
+		dataTable.addCol("testStringColumn", new DataColumn());
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "1");
+		assert(afterFilter.getNumRow()==dataTable.getNumRow());
 	}
 	
 
@@ -151,6 +158,12 @@ public class DataTableTest {
 		assert(afterFilter.getNumRow()==1);
 	}
 	
+	@Test
+	void testFilterByLabel_EmptyAfterFilter()throws DataTableException{
+		dataTable.addCol("testStringColumn", testStringColumn);
+		DataTable afterFilter=dataTable.filterByLabel("testStringColumn", "0");
+		assert(afterFilter.getNumRow()==0);
+	}
 	@Test
 	void testGetDataTable()throws DataTableException{
 		dataTable.addCol("testStringColumn", testStringColumn);

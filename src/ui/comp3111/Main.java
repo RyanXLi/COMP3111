@@ -74,8 +74,22 @@ public class Main extends Application {
 			 
         DataTable dt1 = new DataTable();
 		dtcl.addDataTable(dt1);
-		DataChart dc1 = new DataChart();
-		dtcl.addDataChart(dc1);
+       
+	    	DataColumn testDataColumn   = new DataColumn(DataType.TYPE_NUMBER, new Number[] {1,2, 3, 4, 5,6,7});
+	    	DataColumn testDoubleColumn = new DataColumn(DataType.TYPE_NUMBER, new Double[] {3.3, 2.2, 1.1, 5.5, 4.4,7.7,6.6});
+	    	DataColumn testStringColumn = new DataColumn(DataType.TYPE_STRING, new String[] {"a","b","a", "a", "b","b","a"});
+	    	//DataColumn testCommaColumn  = new DataColumn(DataType.TYPE_STRING, new String[] {"a","a","a","a", "a"});
+	    	try {
+		    	dt1.addCol("testDataColumn", testDataColumn  );
+		    	dt1.addCol("testDoubleColumn", testDoubleColumn);
+		    	dt1.addCol("testStringColumn", testStringColumn);
+		    	//dt1.addCol("testCommaColumn", testCommaColumn );
+	    	} catch (Exception e) {
+			}
+      
+    	
+
+
 
 	    primaryStage.setScene(primaryScene(primaryStage));
 	    primaryStage.setTitle("PlaYFuL BluE MoOn");
