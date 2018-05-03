@@ -16,18 +16,17 @@ public class EnvirHandler {
 	 * Remind that if loaded, current data will all be replace as there is only one dataCollection
 	 * @author xzhaoar
 	 * @param filename
-	 *            - the name you want, or the file you want to replace
+	 *             the name you want, or the file you want to replace
 	 * @param dc
-	 *            - the DataCollection (all the data) you want to save/load
+	 *             the DataCollection (all the data) you want to save/load
 	 * @param function
-	 *            - "S" for "Save, "L" for load  , the function you want to use
+	 *             "S" for "Save, "L" for load  , the function you want to use
 	 * @return DataCollection
-	 * 			  - return the dataCollection loaded from .comp3111, it will replace the one you are currently using               
-	 * @throws DataTableException,IOException, ClassNotFoundException
-	 *             - It throws DataTableException if a column is already exist, or
-	 *             the row size does not match.
-	 *             - It throws IOException if the file cannot be open or cannot be written
-	 *             - It throws ClassNotFoundException if the saved file is not serialized by DataCollection
+	 * 			   return the dataCollection loaded from .comp3111, it will replace the one you are currently using               
+	 * @throws IOException            
+	 *              It throws IOException if the file cannot be open or cannot be written
+	 * @throws ClassNotFoundException
+	 *              It throws ClassNotFoundException if the saved file is not serialized by DataCollection
 	 */
 	
 	public static DataCollection envirHandler(DataCollection dc, String filename, String function) throws IOException, ClassNotFoundException {

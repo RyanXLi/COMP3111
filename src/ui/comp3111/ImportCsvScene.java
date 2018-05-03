@@ -72,10 +72,10 @@ public class ImportCsvScene {
 	/**
 	 * Scene for import .csv button
 	 * @author xzhaoar
-	 * @param Stage
-	 *            - original main stage
+	 * @param primaryStage
+	 *             original main stage
 	 * @param dtName
-	 *            - the DataTable you want to save
+	 *             the DataTable you want to save
 	 * @return importCsvScene
 	 */
 	public static Scene importCsv(Stage primaryStage, String dtName) {

@@ -25,10 +25,10 @@ public class DataColumn implements Serializable{
 	 * Constructor. Create a data column by giving the typename and array of Object
 	 * 
 	 * @param typeName
-	 *            - defined in DataType. Should be matched with the type of the
+	 *             defined in DataType. Should be matched with the type of the
 	 *            array element
 	 * @param values
-	 *            - any Java Object array
+	 *             any Java Object array
 	 */
 	public DataColumn(String typeName, Object[] values) {
 		set(typeName, values);
@@ -38,10 +38,10 @@ public class DataColumn implements Serializable{
 	 * Associate a Java Object array (with the correct typeName) to DataColumn
 	 * 
 	 * @param typeName
-	 *            - defined in DataType. Should be matched with the type of the
+	 *             defined in DataType. Should be matched with the type of the
 	 *            array element
 	 * @param values
-	 *            - any Java Object array
+	 *             any Java Object array
 	 */
 	public void set(String typeName, Object[] values) {
 		this.typeName = typeName;

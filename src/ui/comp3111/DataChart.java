@@ -34,7 +34,7 @@ public class DataChart implements Serializable{
 	/**
 	 * The method of drawing a data chart
 	 * @param primaryStage
-	 * 			- the primary stage of the application
+	 * 			 the primary stage of the application
 	 */
 	public void draw(Stage primaryStage) {}
 

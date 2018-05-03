@@ -24,7 +24,7 @@ public class DataCollection implements Serializable{
 	
 	
 	/**
-	 * Construct - Create an empty DataCollection
+	 * Construct  Create an empty DataCollection
 	 */
 	public DataCollection(){
 		tableCollection = new LinkedHashMap<String, DataTable>();
@@ -37,7 +37,7 @@ public class DataCollection implements Serializable{
 	/**
 	 * Construct - copy from a DataCollection
 	 * @param dc
-	 *     - The DataCollection copying from
+	 *      The DataCollection copying from
 	 */
 	public DataCollection(DataCollection dc){
 		tableCollection = dc.tableCollection;
@@ -50,7 +50,7 @@ public class DataCollection implements Serializable{
 	/**
 	 * Check whether the DataTable exists by the given name
 	 * @param tableName
-	 *            - the name of the target DataTable
+	 *             the name of the target DataTable
 	 * @return True if it contains the dataTable, false otherwise
 	 * 
 	 */	
@@ -62,7 +62,7 @@ public class DataCollection implements Serializable{
 	/**
 	 * Check whether the Chart exists by the given name
 	 * @param chartName
-	 *            - the name of the target chart
+	 *             the name of the target chart
 	 * @return True if it contains the chart, false otherwise
 	 * 
 	 */
@@ -78,7 +78,7 @@ public class DataCollection implements Serializable{
 	 * Add a DataTable to the collection.
 	 * 
 	 * @param dt
-	 *        - the DataTable, it will be given a name automatically
+	 *         the DataTable, it will be given a name automatically
 	 * 
 	 */
 	public void addDataTable(DataTable dt) {
@@ -92,7 +92,7 @@ public class DataCollection implements Serializable{
 	 * Add a Chart to the collection.
 	 * 
 	 * @param dc
-	 *        - the Chart, it will be given a name automatically
+	 *         the Chart, it will be given a name automatically
 	 * 
 	 */
 	
@@ -105,7 +105,8 @@ public class DataCollection implements Serializable{
 	
 	
 	/**
-	 * Get the DataTable map
+	 * Get the map containing all the DataTables
+	 * 
 	 * @return  the map containing all the DataTables
 	 */
 	
@@ -115,7 +116,8 @@ public class DataCollection implements Serializable{
 	
 	
 	/**
-	 * Get the Chart map
+	 * Get the map containing all the Charts
+	 * 
 	 * @return the map containing all the Charts
 	 */
 	public Map<String, DataChart> getChartCollection(){
@@ -128,7 +130,7 @@ public class DataCollection implements Serializable{
 	 * DataTable does not exist
 	 * 
 	 * @param tableName
-	 *            - name of the DataTable needed to fetch.
+	 *             name of the DataTable needed to fetch.
 
 	 * @return the required DataTable or null
 	 */
@@ -145,7 +147,7 @@ public class DataCollection implements Serializable{
 	 * Chart does not exist
 	 * 
 	 * @param chartName
-	 *            - name of the Chart needed to fetch.
+	 *             name of the Chart needed to fetch.
 
 	 * @return the required Chart or null
 	 */
@@ -164,7 +166,7 @@ public class DataCollection implements Serializable{
 	 * Do nothing if such DataTable doesn't exist
 	 * 
 	 * @param tableName
-	 *        - The name of the DataTable the user wants to remove
+	 *         The name of the DataTable the user wants to remove
 	 */
 	
 	public void removeDataTable(String tableName) {
@@ -181,7 +183,7 @@ public class DataCollection implements Serializable{
 	 * Do nothing if such Chart doesn't exist
 	 * 
 	 * @param chartName
-	 *        - The name of the Chart the user wants to remove
+	 *         The name of the Chart the user wants to remove
 	 */
 	
 	public void removeDataChart(String chartName) {
@@ -197,17 +199,19 @@ public class DataCollection implements Serializable{
 	 * Do numeric filter on a specified DataTable
 	 * then replace the original table with the result or create a new dataTable
 	 * @param dtName
-	 *        - The DataTable selected to do the filtering
+	 *         The DataTable selected to do the filtering
 	 * @param colName
-	 *        - The column in the DataTable which we based on when filtering
+	 *         The column in the DataTable which we based on when filtering
 	 * @param op
-	 *        - operator used when filtering
+	 *         operator used when filtering
 	 * @param num
-	 *        - target number used when filtering
+	 *         target number used when filtering
 	 * @param handleMode
-	 *        - when True, the original DaTatable is replaced, when false, a new DataTable is created.
+	 *         when True, the original DaTatable is replaced, when false, a new DataTable is created.
 	 * @throws DataTableException
-	 *        -  It throws DataTableException if the filtering failed.
+	 *          It throws DataTableException if the filtering failed.
+	 * @throws NumberFormatException
+	 *          It throws NumberFormatException if the number is invalid.
 	 */
 	
 	
@@ -230,15 +234,15 @@ public class DataCollection implements Serializable{
 	 * Do textual filter on a specified DataTable
 	 * then replace the original table with the result or create a new dataTable 
 	 * @param dtName
-	 *        - The DataTable selected to do the filtering
+	 *         The DataTable selected to do the filtering
 	 * @param colName
-	 *        - The column in the DataTable which we based on when filtering	 
+	 *         The column in the DataTable which we based on when filtering	 
 	 * @param text
-	 *        - text used when filtering
+	 *         text used when filtering
 	 * @param handleMode
-	 *        - when True, the original DaTatable is replaced, when false, a new DataTable is created.
+	 *         when True, the original DaTatable is replaced, when false, a new DataTable is created.
 	 * @throws DataTableException
-	 *        -  It throws DataTableException if the filtering failed.
+	 *          It throws DataTableException if the filtering failed.
 	 */
 	
 	public void textFilter(String dtName, String colName, String text, boolean handleMode) throws DataTableException {

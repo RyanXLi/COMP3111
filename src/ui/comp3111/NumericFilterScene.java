@@ -14,7 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 /**
- * The numeric filter page
+ * The numeric filter page, implemented to support numeric filter algorithm.
  * @author qchenax
  *
  */
@@ -22,9 +22,9 @@ public class NumericFilterScene {
 	/**
 	 * Draw the numeric filter page
 	 * @param primaryStage
-	 *        - The Stage of the application, used to return to the main page
+	 *         The Stage of the application, used to return to the main page
 	 * @param dtName
-	 *        - The DataTable selected to do filtering
+	 *         The DataTable selected to do filtering
 	 * @return The numeric filter scene
 	 *    
 	 */
@@ -89,7 +89,7 @@ public class NumericFilterScene {
 		    boolean handleMode = rb1.isSelected();
 			Main.dtcl.numFilter(dtName, colName,operator,num, handleMode);}
 	        catch (DataTableException | NumberFormatException e1) {
-	        	Alert alert = new Alert(AlertType.WARNING,"Invalid number");
+	        	Alert alert = new Alert(AlertType.WARNING,"Warning! Invalid number");
 				alert.showAndWait();
 	        }
             primaryStage.setScene(Main.primaryScene(primaryStage));});

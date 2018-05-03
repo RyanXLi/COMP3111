@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 /**
- * The text filter page
+ * The text filter page, implemented to support text filter algorithm.
  * @author qchenax
  *
  */
@@ -26,9 +26,9 @@ public class TextFilterScene {
 	/**
 	 * Draw the text filter page
 	 * @param primaryStage
-	 *        - The Stage of the application, used to return to the main page
+	 *         The Stage of the application, used to return to the main page
 	 * @param dtName
-	 *        - The DataTable selected to do filtering
+	 *         The DataTable selected to do filtering
 	 * @return The text filter scene
 	 *    
 	 */

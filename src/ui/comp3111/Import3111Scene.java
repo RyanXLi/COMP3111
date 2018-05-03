@@ -70,10 +70,10 @@ public class Import3111Scene {
 	/**
 	 * Scene for import 3111 button
 	 * @author xzhaoar
-	 * @param Stage
-	 *            - original main stage
+	 * @param primaryStage
+	 *             original main stage
 	 * @param dtName
-	 *            - the DataTable you want to save
+	 *             the DataTable you want to save
 	 * @return import3111Scene
 	 */
 	public static Scene import3111(Stage primaryStage, String dtName) {

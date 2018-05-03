@@ -70,10 +70,10 @@ public class Export3111Scene {
 	/**
 	 * Scene for export 3111 button
 	 * @author xzhaoar
-	 * @param Stage
-	 *            - original main stage
+	 * @param primaryStage
+	 *             original main stage
 	 * @param dtName
-	 *            - the DataTable you want to save
+	 *             the DataTable you want to save
 	 * @return export3111Scene
 	 */
 	
