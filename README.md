@@ -18,7 +18,7 @@ Team Leader Features| 2,6					|
 __________________________________________________________________________________
 Team Member Name    | Zhao Xinran			| Chen Qixu
 __________________________________________________________________________________
-Team Member ITSC    | xzhaoar@connect.ust.hk| qchenax@connec.ust.hk
+Team Member ITSC    | xzhaoar@connect.ust.hk| qchenax@connect.ust.hk
 __________________________________________________________________________________
 Team Member Features| 1,4					| 3,5
 __________________________________________________________________________________

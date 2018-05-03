@@ -213,13 +213,10 @@ public class DataCollection implements Serializable{
 	
 	//NumberFormatException, DataTableException 
 	public void numFilter(String dtName, String colName, String op, String num, 
-			boolean handleMode) throws DataTableException{
+			boolean handleMode) throws DataTableException,NumberFormatException{
 		DataTable originDT = tableCollection.get(dtName);
 		DataTable resultDT = new DataTable();
-        try{resultDT = originDT.filterByOperator(colName, op, Double.parseDouble(num.toString()));}
-        catch(NumberFormatException e3) {
-        	return;
-        }
+        resultDT = originDT.filterByOperator(colName, op, Double.parseDouble(num.toString()));
         if(handleMode==true) {
         	tableCollection.put(dtName, resultDT);
         }
