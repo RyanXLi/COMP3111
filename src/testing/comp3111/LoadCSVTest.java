@@ -139,7 +139,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Median"); 
 		
-		assert(test.containsColumn("testDoubleColumn"));
+		assert(test.containsColumn("testDoubleColumn")); 
 	}
 	/** 
 	 * Test the duplicated case for double.
