@@ -71,6 +71,7 @@ class SaveCSVTest {
 			testList.add(line);
 		}
 		ArrayList<String> trueList = new ArrayList<>();
+		trueList.add("testDataColumn,testStringColumn");
 		trueList.add("1,1");
 		trueList.add("2,2");
 		trueList.add("3,3");
