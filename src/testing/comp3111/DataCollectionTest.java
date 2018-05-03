@@ -11,7 +11,7 @@ import core.comp3111.DataType;
 import ui.comp3111.DataChart;
 
 /**
- * A sample DataCollection test case written using JUnit. It achieves 100% test
+ * A DataCollection test case written using JUnit. It achieves 100% test
  * coverage on the DataColection class
  * 
  * @author qchenax

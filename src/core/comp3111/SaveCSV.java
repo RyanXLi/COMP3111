@@ -19,14 +19,14 @@ public class SaveCSV {
 	/**
 	 * Save a dataTable to .csv with the filename you want
 	 * @author xzhaoar
-	 * @param filename
-	 *            - the name you want, or the file you want to replace
+	 * @param fileName
+	 *             the name you want, or the file you want to replace
 	 * @param source
-	 *            - the DataTable you want to save
-	 * @throws DataTableException,IOException
-	 *             - It throws DataTableException if a column is already exist, or
-	 *             the row size does not match.
-	 *             - It throws IOException if the file cannot be open or cannot be written
+	 *             the DataTable you want to save
+	 * @throws DataTableException
+	 *              It throws DataTableException if a column is already exist, or if the row size does not match.
+	 * @throws IOException             
+	 *              It throws IOException if the file cannot be open or cannot be written
 	 */
 	public static void saveCSV(String fileName, DataTable source) throws IOException, DataTableException {
 		

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * uniquely identified by its column name (5) add/remove a column is supported
  * (6) Suitable exception handling is implemented
  * 
- * @author cspeter
+ * @author qchenax
  *
  */
 public class DataTable implements Serializable{
@@ -35,11 +35,11 @@ public class DataTable implements Serializable{
 	 * Add a data column to the table.
 	 * 
 	 * @param colName
-	 *            - name of the column. It should be a unique identifier
+	 *             name of the column. It should be a unique identifier
 	 * @param newCol
-	 *            - the data column
+	 *             the data column
 	 * @throws DataTableException
-	 *             - It throws DataTableException if a column is already exist, or
+	 *              It throws DataTableException if a column is already exist, or
 	 *             the row size does not match.
 	 */
 	public void addCol(String colName, DataColumn newCol) throws DataTableException {
@@ -69,8 +69,8 @@ public class DataTable implements Serializable{
 	 * Remove a column from the data table
 	 * 
 	 * @param colName
-	 *            - The column name. It should be a unique identifier
-	 * @throws DataTableException.
+	 *             The column name. It should be a unique identifier
+	 * @throws DataTableException
 	 *             It throws DataTableException if the column does not exist
 	 */
 	public void removeCol(String colName) throws DataTableException {
@@ -86,7 +86,7 @@ public class DataTable implements Serializable{
 	 * column does not exist
 	 * 
 	 * @param colName
-	 *            The column name
+	 *            The name of the column to fetch
 	 * @return DataColumn reference or null
 	 */
 	public DataColumn getCol(String colName) {
@@ -100,6 +100,7 @@ public class DataTable implements Serializable{
 	 * Check whether the column exists by the given column name
 	 * 
 	 * @param colName
+	 *         The name of the search target column
 	 * @return true if the column exists, false otherwise
 	 */
 	public boolean containsColumn(String colName) {
@@ -165,18 +166,18 @@ public class DataTable implements Serializable{
 	/**
 	 * Do the numeric filtering according to the operator and number provided by user. 
 	 * @param colName
-	 *         - The column name, which column is based on when filtering.
+	 *          The column name, which column is based on when filtering.
 	 * @param operator
-	 *         - The operator, could be >, <, >=, <=, == 
+	 *          The operator, could be &lt;,&lt;=,&gt;,&gt;=,==
 	 * @param num
-	 *         - The number provided by user
+	 *          The number provided by user
 	 * @return the new DataTable after filtering
 	 * 
 	 * @throws DataTableException
 	 *         It throws DataTableException if the column cannot be added to the new DataTable
 	 *         
 	 */
-	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException, NumberFormatException {
+	public DataTable filterByOperator(String colName, String operator, double num) throws DataTableException {
 
 		DataTable result = new DataTable();
         
@@ -261,9 +262,9 @@ public class DataTable implements Serializable{
 	/**
 	 * Do the textual filtering according to the operator and number provided by user. 
 	 * @param colName
-	 *         - The column name, which column is based on when filtering.
+	 *          The column name, which column is based on when filtering.
 	 * @param label
-	 *         - The text provided by user to do filtering
+	 *          The text provided by user to do filtering
 	 *         
 	 * @return the new DataTable after filtering
 	 * 

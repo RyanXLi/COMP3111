@@ -85,11 +85,11 @@ public class DrawConfigurationScene {
 	 * Draw the scene for the chart generation configuration.
 	 * 
 	 * @param primaryStage
-	 * 			- primary stage for the application
+	 * 			 primary stage for the application
 	 * @param dtName
-	 * 			- name of the data table chosen to draw chart
+	 * 			 name of the data table chosen to draw chart
 	 * @param chartType
-	 * 			- the type of chart to be generated
+	 * 			 the type of chart to be generated
 	 * @return The scene for the chart generation configuration
 	 */
 	public static Scene configureDrawing(Stage primaryStage, String dtName, String chartType) {

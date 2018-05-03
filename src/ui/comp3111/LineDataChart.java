@@ -60,11 +60,11 @@ public class LineDataChart extends DataChart implements Serializable{
 	 * x-axis lower and upper bound of the chart. 
 	 * 
 	 * @param another
-	 * 			- the copied LineDataChart
+	 * 			 the copied LineDataChart
 	 * @param lowerBound
-	 * 			- the new lower bound of x axis
+	 * 			 the new lower bound of x axis
 	 * @param upperBound
-	 * 			- the new upper bound of x axis
+	 * 			 the new upper bound of x axis
 	 */
 	public LineDataChart(LineDataChart another, double lowerBound, double upperBound) {
 		this.xAxis = another.xAxis;
@@ -85,25 +85,26 @@ public class LineDataChart extends DataChart implements Serializable{
 	 * ready to be drawn
 	 * 
 	 * @param dataTable
-	 * 			- the reference of the data table to create a chart from
+	 * 			 the reference of the data table to create a chart from
 	 * @param xColName
-	 * 			- name of the column to be the x-axis of the chart.
+	 * 			 name of the column to be the x-axis of the chart.
 	 * 				It has to denote a numeric column
 	 * @param yColName
-	 * 			- name of the column to be the y-axis of the chart.
+	 * 			 name of the column to be the y-axis of the chart.
 	 * 				It has to denote a numeric column
 	 * @param chartTitle
-	 * 			- the title of the chart to be created
+	 * 			 the title of the chart to be created
 	 * @param animate
-	 * 			- whether the line chart should be animated
+	 * 			 whether the line chart should be animated
 	 * @param update
-	 * 			- whether the construction is a update of a
+	 * 			 whether the construction is a update of a
 	 * 				original data chart
 	 * @param lowerBound
-	 * 			- the lower bound of the x-axis
+	 * 			 the lower bound of the x-axis
 	 * @param upperBound
-	 * 			- the upper bound of the x-axis
+	 * 			 the upper bound of the x-axis
 	 * @throws DataTableException
+	 *          It throws DataTableException if the reference is null 
 	 */
 	public LineDataChart(DataTable dataTable, String xColName, String yColName, String chartTitle, boolean animate,
 			boolean update, double lowerBound, double upperBound) throws DataTableException {
@@ -195,7 +196,7 @@ public class LineDataChart extends DataChart implements Serializable{
 	 * Draw the line chart to the stage, with animation if required
 	 * 
 	 * @param primaryStage
-	 * 			- the primary stage of the application
+	 * 			 the primary stage of the application
 	 */
 	@Override
 	public void draw(final Stage primaryStage) {
