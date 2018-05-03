@@ -36,9 +36,9 @@ Best 3 Commits      |Zhao's
                     ______________________________________________________________
                     |Li's
 					______________________________________________________________                    
-                    |
-                    |
-                    |
+                    |https://github.com/RyanXLi/COMP3111/pull/16/commits/b0a2079bee1788fd1376635c968c9c24735bd65f
+                    |https://github.com/RyanXLi/COMP3111/pull/18/commits/63b98b9db756eb00d2292889aa5e204125dc7d85
+                    |https://github.com/RyanXLi/COMP3111/pull/23/commits/657ec5b4db936a6225c6757635b162034a5eeaaf
 __________________________________________________________________________________
 Best Pull Request   |Li's
  (Not the final)	______________________________________________________________
