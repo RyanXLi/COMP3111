@@ -32,7 +32,7 @@ class LoadCSVTest {
 	DataColumn testDataColumn;
 	DataColumn testStringColumn;
 	DataColumn testDoubleColumn;
-	DataColumn testCommaColumn;
+	DataColumn testCommaColumn; 
 	
 	DataTable dataTable;
 	/** 
@@ -74,7 +74,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default"); 
 		
-		assert(test.containsColumn("a"));
+		assert(test.containsColumn("testStringColumn"));
 	}
 	 
 	/** 
@@ -91,7 +91,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Median"); 
 		
-		assert(test.containsColumn("1"));
+		assert(test.containsColumn("testDataColumn"));
 	}
 	/** 
 	 * Test the duplicate name handle, if it is working as the naming rule.
@@ -107,7 +107,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default"); 
 		
-		assert(test.containsColumn("1.1"));
+		assert(test.containsColumn("testDoubleColumn"));
 	}
 	/** 
 	 * Test the case when missing data handling type is mean
@@ -123,7 +123,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Mean"); 
 		
-		assert(test.containsColumn("1.1"));
+		assert(test.containsColumn("testDoubleColumn"));
 	}
 	/** 
 	 * Test the case when missing data handling type is median
@@ -139,7 +139,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Median"); 
 		
-		assert(test.containsColumn("1.1"));
+		assert(test.containsColumn("testDoubleColumn")); 
 	}
 	/** 
 	 * Test the duplicated case for double.
@@ -156,7 +156,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default"); 
 	
-		assert(test.containsColumn("1.1 @1"));
+		assert(test.containsColumn("testDoubleColumn2"));
 	}
 	/** 
 	 * Test the duplicated case for string.
@@ -173,7 +173,7 @@ class LoadCSVTest {
 		
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default"); 
 	
-		assert(test.containsColumn("a"));
+		assert(test.containsColumn("testStringColumn"));
 	}
 	/** 
 	 * Test the case when all the input are comma
@@ -188,7 +188,7 @@ class LoadCSVTest {
 		
 		SaveCSV.saveCSV("testSaveCSV.csv", dataTable);
 		DataTable test = LoadCSV.loadCSV("testSaveCSV.csv", "Default");
-		assert(test.containsColumn(""));
+		assert(test.containsColumn("testCommaColumn"));
 	}
 	/** 
 	 * Test the general case when we need to handle the missing data
